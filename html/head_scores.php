@@ -5,10 +5,6 @@
   <!-- Custom styles -->
   <style>
   th.scores, td.scores, input.holes { text-align: center; }
-<<<<<<< HEAD
   .name_label { font-size: 18px; }
-=======
-  .name_label { font-size: 14px; }
->>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
   .container-fluid { width: 100%; }
   </style>
