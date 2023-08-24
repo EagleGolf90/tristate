@@ -11,6 +11,7 @@
 <?php
 switch ($file_name) {
   case 'scores/index.php':
+  case 'scores/enterScores_orig.php':
 ?>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <?php

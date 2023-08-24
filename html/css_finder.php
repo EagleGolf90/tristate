@@ -8,6 +8,7 @@ switch ($file_name) {
     break;
   case 'scores/index.php':
   case 'scores/test1.php':
+  case 'scores/enterScores.php':
     include(HTML . 'head_scores.php');
     break;
 }
