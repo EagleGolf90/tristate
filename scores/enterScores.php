@@ -4,6 +4,7 @@ include('golf_data.php');
 include(HTML . 'beginHTML.php');
 ?>
 
+<<<<<<< HEAD
 <form id="regForm" action="display.php" method="post">
   <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
 <?php for ($y = 0; $y < sizeof($players); $y++) { ?>
@@ -25,10 +26,18 @@ include(HTML . 'beginHTML.php');
 for ($y = 0; $y < 18; $y++) {
   $holeNumber = ((($y + 1) < 10) ? '0' : '') . ($y+1);
   $maxPar = $holes[$y][0] + 4;
+=======
+<div class="container-fluid">
+<form id="regForm" action="/action_page.php">
+<?php
+for ($y = 0; $y < 18; $y++) {
+    $holeNumber = ((($y + 1) < 10) ? '0' : '') . ($y+1);
+>>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
 ?>
   <div class="tab">
     <h1><?php echo 'Hole ' . ($y+1) . ' - Par ' . $holes[$y][0] . ', Yards ' . $holes[$y][1]; ?></h1>
 <?php for ($z = 0; $z < sizeof($players); $z++) {
+<<<<<<< HEAD
         $player_id = '';
         if ($players[$z][2] < 100) $player_id = '0' . $players[$z][2];
         if ($players[$z][2] < 10) $player_id = '00' . $players[$z][2];
@@ -41,6 +50,18 @@ for ($y = 0; $y < 18; $y++) {
         <input type="number" pattern="[0-9]*" name="<?php echo $score_id; ?>[]" id="<?php echo $name_id; ?>" class="form-control holes" value="" onkeyup="display('<?php echo $name_id; ?>')" min="1" max="<?php echo $maxPar; ?>">
       </div>
       <div class="col-2"><label class="text-center" id="par_label_<?php echo $name_id; ?>">&nbsp;</label></div>
+=======
+        //$name_id = 'p_' . $players[$z][0] . '_' . $holeNumber;
+        $zeros = '';
+        if ($players[$z][2] < 100) $zeros = '0' . $players[$z][2];
+        if ($players[$z][2] < 10) $zeros = '00' . $players[$z][2];
+        $name_id = 'p_' . $zeros;
+?>
+    <div class="row">
+      <div class="col-5"><label class="name_label"><?php echo $players[$z][1]; ?></label></div>
+      <div class="col-2"><input type="number" name="<?php echo $name_id; ?>[]" id="<?php echo $name_id; ?>" class="form-control holes" value=""></div>
+      <!-- <div class="col-4"><input type="number" name="scores[<?php //echo $z; ?>][<?php //echo $y; ?>]" class="form-control holes" value=""></div> -->
+>>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
       <div class="col-2">&nbsp;</div>
       </div>
 <?php } ?>
@@ -61,9 +82,23 @@ for ($y = 0; $y < 18; $y++) {
     <span class="step"></span>
 <?php } ?>
   </div>
+<<<<<<< HEAD
+=======
+</form>
+>>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
 </div>
 </form>
 
+<<<<<<< HEAD
+=======
+<script type="text/javascript">
+function display(id) {
+    var input = document.getElementsByName('scores');
+    alert(input);
+}
+</script>
+
+>>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
 <?php
 include(HTML . 'scripts.php');
 include(HTML . 'endHTML.php');

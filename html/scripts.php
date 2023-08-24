@@ -1,9 +1,12 @@
 <script>
+<<<<<<< HEAD
 var course_pars = [ <?php echo $allpars; ?> ];
 var par3 = [ 'Ace', 'Birdie', 'Par', 'Bogey', 'Double Bogey', 'Triple Bogey', 'Others' ];
 var par4 = [ 'Ace', 'Eagle', 'Birdie', 'Par', 'Bogey', 'Double Bogey', 'Triple Bogey', 'Others' ];
 var par5 = [ 'Ace', 'Albatross', 'Eagle', 'Birdie', 'Par', 'Bogey', 'Double Bogey', 'Triple Bogey', 'Others' ];
 
+=======
+>>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -76,6 +79,7 @@ function fixStepIndicator(n) {
   //... and adds the "active" class on the current step:
   x[n].className += " active";
 }
+<<<<<<< HEAD
 
 function strokesLabel(your_score, hole_number) {
   var temp_label = '';
@@ -104,6 +108,8 @@ function display(id_name) {
     document.getElementById('par_label_' + id_name).innerHTML = strokesLabel(your_score, hole_number);
   }
 }
+=======
+>>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
 </script>
 
 <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
