@@ -1,58 +1,70 @@
 <?php
 include('../preload.php');
+include('golf_data.php');
+include(HTML . 'beginHTML.php');
+?>
 
-//include(INCLUDES . 'golf_scores.php');
+<form id="regForm" action="display.php" method="post">
+  <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
+<?php for ($y = 0; $y < sizeof($players); $y++) { ?>
+  <input type="text" name="player[]" value="<?php echo $players[$y][2]; ?>" hidden>
+<?php } ?>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1><?php echo $courseInfo[0][1]; ?></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2><?php echo $date_played; ?></h2>
+    </div>
+  </div>
 
-$course_name = 'Willows';
-$date_played = 'Saturday, July 22, 2023';
-$players = array("001" => "Brian Timberlake", "027" => "Jeff Cecil", "018" => "Mark Flaherty");
-$holes = array(4, 3, 4, 4, 3, 5, 4, 4, 5, 4, 3, 5, 4, 4, 4, 4, 3, 5);
-
-foreach($age as $x => $val) {
-  echo "$x = $val<br>";
+<?php
+for ($y = 0; $y < 18; $y++) {
+  $holeNumber = ((($y + 1) < 10) ? '0' : '') . ($y+1);
+  $maxPar = $holes[$y][0] + 4;
+?>
+  <div class="tab">
+    <h1><?php echo 'Hole ' . ($y+1) . ' - Par ' . $holes[$y][0] . ', Yards ' . $holes[$y][1]; ?></h1>
+<?php for ($z = 0; $z < sizeof($players); $z++) {
+        $player_id = '';
+        if ($players[$z][2] < 100) $player_id = '0' . $players[$z][2];
+        if ($players[$z][2] < 10) $player_id = '00' . $players[$z][2];
+        $name_id = 'p_' . $player_id . '_' . $holeNumber;
+        $score_id = 'scores' . $player_id;
+?>
+    <div class="row">
+      <div class="col-5"><label class="name_label text-right"><?php echo $players[$z][1]; ?></label></div>
+      <div class="col-3">
+        <input type="number" pattern="[0-9]*" name="<?php echo $score_id; ?>[]" id="<?php echo $name_id; ?>" class="form-control holes" value="" onkeyup="display('<?php echo $name_id; ?>')" min="1" max="<?php echo $maxPar; ?>">
+      </div>
+      <div class="col-2"><label class="text-center" id="par_label_<?php echo $name_id; ?>">&nbsp;</label></div>
+      <div class="col-2">&nbsp;</div>
+      </div>
+<?php } ?>
+  </div>
+<?php
 }
-
-include('beginHTML.php');
 ?>
-
-<div class="container">
-  <form class="form-signin">
-    <div class="text-center mb-4">
-      <h1 class="ctr"><?php echo $course_name; ?></h1>
-      <h5 class="ctr"><?php echo $date_played; ?></h5>
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
     </div>
+  </div>
 
-<?php foreach ($players as $key => $name) { ?>
-    <div class="form-label-group">
-      <h3><?php echo $name; ?></h3>
-      <table class="table table-bordered table-striped">
-        <tr>
-          <th>Hole</th>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;" hidden>
 <?php for ($x = 1; $x <= 18; $x++) { ?>
-          <th><?php echo $x; ?></th>
+    <span class="step"></span>
 <?php } ?>
-        </tr>
-        <tr>
-          <th>Par</th>
-<?php for ($x = 0; $x < 18; $x++) { ?>
-          <th><?php echo $holes[$x]; ?></th>
-<?php } ?>
-        </tr>
-        <tr>
-          <th>&nbsp;</th>
-<?php for ($x = 1; $x <= 18; $x++) {
-        $tag_id = 'p_' . ($x < 10 ? '0' : '') . $x . '_' . $key;
-?>
-          <td><input type="text" id="<?php echo $tag_id; ?>" class="form-control holes" required autofocus></td>
-<?php } ?>
-        </tr>
-      </table>
-    </div>
-<?php } ?>
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-  </form>
-
+  </div>
 </div>
+</form>
 
-<?php include('endHTML.php'); ?>
+<?php
+include(HTML . 'scripts.php');
+include(HTML . 'endHTML.php');
+?>
