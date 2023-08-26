@@ -74,14 +74,29 @@ function fixStepIndicator(n) {
   x[n].className += " active";
 }
 
-function display(id_name) {
-  document.getElementById(id_name).classList.remove("invalid");
-  var your_score = parseInt(document.getElementById(id_name).value);
-  var hole_number = parseInt(id_name.substring(6));
-  if (course_pars[hole_number-1]+4 < your_score) {
-    alert('Your score cannot be more than ' + (course_pars[hole_number-1]+4));
-    window.location = "#" + id_name;
+function calculateTotal(id) {
+  var obj = document.getElementById('total_' + id);
+  var total = 0;
+
+  for (var x = 1; x <= 18; x++) {
+    var hole_number = (x < 10 ? '0' : '') + x;
+    var obj_score = document.getElementById('p_' + id + '_' + hole_number);
+    if (parseInt(obj_score.value) > 0) {
+      total += parseInt(obj_score.value);
+    }
+  }
+  obj.innerHTML = parseInt(total);
+}
+
+function display(hole, player_id) {
+  var tag_name = 'p_' + player_id + '_' + hole;
+  var obj_id = document.getElementById(tag_name);
+  obj_id.classList.remove("invalid");
+  var your_score = parseInt(obj_id.value);
+  if (course_pars[parseInt(hole)-1]+4 < your_score) {
+    alert('Your score cannot be more than ' + (course_pars[parseInt(hole)-1]+4));
   } else {
+    calculateTotal(player_id);
   }
 }
 </script>

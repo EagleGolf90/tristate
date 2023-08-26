@@ -35,12 +35,14 @@ include(HTML . 'beginHTML.php');
 <?php for ($x = 1; $x <= 18; $x++) { ?>
           <th class="scores"><?php echo $x; ?></th>
 <?php } ?>
+          <th>&nbsp;</th>
         </tr>
         <tr>
           <th>Par</th>
 <?php for ($x = 0; $x < 18; $x++) { ?>
           <th class="scores"><?php echo $holes[$x][0]; ?></th>
 <?php } ?>
+          <th>Total</th>
         </tr>
         <tr>
           <th>&nbsp;</th>
@@ -51,9 +53,12 @@ include(HTML . 'beginHTML.php');
         $score_id = 'scores' . $player_id;
 ?>
           <td class="scores">
-            <input type="number" pattern="[0-9]*" name="<?php echo $score_id; ?>[]" id="<?php echo $name_id; ?>" class="form-control holes" value="" onkeyup="display('<?php echo $name_id; ?>')" min="1" max="<?php echo $maxPar; ?>">
+            <input type="number" pattern="[0-9]*" onchange="display('<?php echo $holeNumber; ?>', '<?php echo $player_id; ?>')"  name="<?php echo $score_id; ?>[]" id="<?php echo $name_id; ?>" class="form-control holes" value="" min="1" max="<?php echo $maxPar; ?>">
           </td>
 <?php } ?>
+          <td class="text-center">
+            <label id="total_<?php echo $player_id; ?>">0</label>
+          </td>
         </tr>
       </table>
     </div>
