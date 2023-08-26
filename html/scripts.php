@@ -1,12 +1,6 @@
 <script>
-<<<<<<< HEAD
 var course_pars = [ <?php echo $allpars; ?> ];
-var par3 = [ 'Ace', 'Birdie', 'Par', 'Bogey', 'Double Bogey', 'Triple Bogey', 'Others' ];
-var par4 = [ 'Ace', 'Eagle', 'Birdie', 'Par', 'Bogey', 'Double Bogey', 'Triple Bogey', 'Others' ];
-var par5 = [ 'Ace', 'Albatross', 'Eagle', 'Birdie', 'Par', 'Bogey', 'Double Bogey', 'Triple Bogey', 'Others' ];
 
-=======
->>>>>>> c54b3681e2baddfe28b37a3b5e6e4f00152b0573
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -80,22 +74,6 @@ function fixStepIndicator(n) {
   x[n].className += " active";
 }
 
-function strokesLabel(your_score, hole_number) {
-  var temp_label = '';
-  switch (course_pars[hole_number-1]) {
-    case 3:
-      temp_label = par3[your_score-1];
-      break;
-    case 4:
-      temp_label = par4[your_score-1];
-      break;
-    case 5:
-      temp_label = par5[your_score-1];
-      break;
-  }
-  return temp_label;
-}
-
 function display(id_name) {
   document.getElementById(id_name).classList.remove("invalid");
   var your_score = parseInt(document.getElementById(id_name).value);
@@ -104,7 +82,6 @@ function display(id_name) {
     alert('Your score cannot be more than ' + (course_pars[hole_number-1]+4));
     window.location = "#" + id_name;
   } else {
-    document.getElementById('par_label_' + id_name).innerHTML = strokesLabel(your_score, hole_number);
   }
 }
 </script>

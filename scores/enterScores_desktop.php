@@ -1,0 +1,73 @@
+<?php
+include('../preload.php');
+include('golf_data.php');
+include(HTML . 'beginHTML.php');
+?>
+
+<form class="regForm" action="update_scores.php" method="post">
+<div class="container-fluid">
+  <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
+<?php for ($y = 0; $y < sizeof($players); $y++) { ?>
+  <input type="text" name="player[]" value="<?php echo $players[$y][2]; ?>" hidden>
+<?php } ?>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h1><?php echo $courseInfo[0][1]; ?></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h2><?php echo $date_played; ?></h2>
+    </div>
+  </div>
+
+<?php for ($z = 0; $z < sizeof($players); $z++) {
+        $player_id = '';
+        if ($players[$z][2] < 100) $player_id = '0' . $players[$z][2];
+        if ($players[$z][2] < 10) $player_id = '00' . $players[$z][2];
+?>
+    <div class="form-label-group">
+      <h3><?php echo $players[$z][1]; ?></h3>
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>Hole</th>
+<?php for ($x = 1; $x <= 18; $x++) { ?>
+          <th class="scores"><?php echo $x; ?></th>
+<?php } ?>
+        </tr>
+        <tr>
+          <th>Par</th>
+<?php for ($x = 0; $x < 18; $x++) { ?>
+          <th class="scores"><?php echo $holes[$x][0]; ?></th>
+<?php } ?>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+<?php for ($x = 0; $x < 18; $x++) {
+        $holeNumber = ((($x + 1) < 10) ? '0' : '') . ($x+1);
+        $maxPar = $holes[$x][0] + 4;
+        $name_id = 'p_' . $player_id . '_' . $holeNumber;
+        $score_id = 'scores' . $player_id;
+?>
+          <td class="scores">
+            <input type="number" pattern="[0-9]*" name="<?php echo $score_id; ?>[]" id="<?php echo $name_id; ?>" class="form-control holes" value="" onkeyup="display('<?php echo $name_id; ?>')" min="1" max="<?php echo $maxPar; ?>">
+          </td>
+<?php } ?>
+        </tr>
+      </table>
+    </div>
+<?php } ?>
+
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </div>
+   </div>
+</div>
+</form>
+
+<?php
+include(HTML . 'scripts.php');
+include(HTML . 'endHTML.php');
+?>

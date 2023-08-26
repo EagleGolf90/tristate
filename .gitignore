@@ -4,3 +4,4 @@ specs/*
 admin/*
 includes/config.php
 scores/backup/*
+html/backup/*

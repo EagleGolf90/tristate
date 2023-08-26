@@ -1,5 +1,4 @@
 <?php
-include('../res_screen.php');
 include('../preload.php');
 include('golf_data.php');
 include(HTML . 'beginHTML.php');
