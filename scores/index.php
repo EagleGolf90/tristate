@@ -37,7 +37,7 @@ $oldCourseID = '';
 for ($x = 0; $x < sizeof($players); $x++) {
   if ($oldCourseID != $players[$x][0]) {
     if ($x > 0) {
-      $url_link = '<a href="start.php?group=' . $oldCourseID . '">' . $groupPlayers . '</a>';
+      $url_link = '<a href="enterScores_desktop.php?group=' . $oldCourseID . '">' . $groupPlayers . '</a>';
 ?>
   <div class="row">
     <div class="col-md-2">&nbsp;</div>

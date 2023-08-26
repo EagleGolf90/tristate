@@ -4,6 +4,8 @@ $golf = new GolfScores();
 
 $courseInfo = $golf->getCourseInfo();
 $holes = $golf->getCourseDetails();
+$roundPlayed = $golf->getRoundPlayed();
+$roundID = $golf->getRoundID();
 
 $allpars = '';
 for ($idx = 0; $idx < sizeof($holes); $idx++) {
