@@ -1,22 +1,23 @@
 <?php
+include('../res_screen.php');
 include('../preload.php');
 include('golf_data.php');
 include(HTML . 'beginHTML.php');
 ?>
 
-<form id="regForm" action="display.php" method="post">
+<form id="regForm" action="update_scores.php" method="post">
   <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
 <?php for ($y = 0; $y < sizeof($players); $y++) { ?>
   <input type="text" name="player[]" value="<?php echo $players[$y][2]; ?>" hidden>
 <?php } ?>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-sm-12 text-center">
       <h1><?php echo $courseInfo[0][1]; ?></h1>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-sm-12 text-center">
       <h2><?php echo $date_played; ?></h2>
     </div>
   </div>
@@ -36,13 +37,18 @@ for ($y = 0; $y < 18; $y++) {
         $score_id = 'scores' . $player_id;
 ?>
     <div class="row">
-      <div class="col-5"><label class="name_label text-right"><?php echo $players[$z][1]; ?></label></div>
-      <div class="col-3">
+      <div>&nbsp;</div>
+      <div class="col-sm-6">
+        <label class="name_label text-right"><?php echo $players[$z][1]; ?></label>
+      </div>
+    </div>
+    <div class="row">
+      <div>&nbsp;</div>
+      <div class="col-sm-3">
         <input type="number" pattern="[0-9]*" name="<?php echo $score_id; ?>[]" id="<?php echo $name_id; ?>" class="form-control holes" value="" onkeyup="display('<?php echo $name_id; ?>')" min="1" max="<?php echo $maxPar; ?>">
       </div>
-      <div class="col-2"><label class="text-center" id="par_label_<?php echo $name_id; ?>">&nbsp;</label></div>
-      <div class="col-2">&nbsp;</div>
-      </div>
+      <div class="col-sm-4"><label class="text-center" id="par_label_<?php echo $name_id; ?>">&nbsp;</label></div>
+    </div>
 <?php } ?>
   </div>
 <?php
