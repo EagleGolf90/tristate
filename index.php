@@ -1,6 +1,6 @@
 <?php
 include('preload.php');
-$location = SCORES_URL . '?bu=' . strtolower(BUS_UNIT);
+$location = SCORES_URL;
 header("Location: " . $location);
 exit;
 ?>

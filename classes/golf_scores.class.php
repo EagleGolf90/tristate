@@ -115,6 +115,9 @@ class GolfScores {
 
       $parm = array($round_played, $player_id, $total);
       $ret = $this->sqlTable->execute('updateScores', $parm);
+      if ($ret == 1) {
+        echo 'Player ' . $player_id . ' scores ' . $total . ' is submitted.<br/>';
+      }
     }
   }
 }
