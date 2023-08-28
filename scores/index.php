@@ -34,10 +34,16 @@ include(HTML . 'beginHTML.php');
 
 <?php
 $oldCourseID = '';
+$score_flag = false;
 for ($x = 0; $x < sizeof($players); $x++) {
   if ($oldCourseID != $players[$x][0]) {
     if ($x > 0) {
-      $url_link = '<a href="enterScores_desktop.php?group=' . $oldCourseID . '">' . $groupPlayers . '</a>';
+      if ($score_flag) {
+        $url_link = $groupPlayers;
+      } else {
+        $url_link = '<a href="enterScores.php?group=' . $oldCourseID . '">' . $groupPlayers . '</a>';
+      }
+      $score_flag = false;
 ?>
   <div class="row">
     <div class="col-md-2">&nbsp;</div>
@@ -51,6 +57,10 @@ for ($x = 0; $x < sizeof($players); $x++) {
   }
   if ($groupPlayers != '') $groupPlayers .= ', ';
   $groupPlayers .= $players[$x][1];
+  if (!empty($players[$x][3])) {
+    $groupPlayers .= ' (' . $players[$x][3] . ')';
+    $score_flag = true;
+  }
   $oldCourseID = $players[$x][0];
 }
 ?>

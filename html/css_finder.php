@@ -9,7 +9,8 @@ switch ($file_name) {
   case 'scores/index.php':
   case 'scores/test1.php':
   case 'scores/enterScores.php':
-  case 'scores/enterScores_desktop.php':
+  case 'scores/enterScores_mobile.php':
+  case 'scores/leaderboard.php':
     include(HTML . 'head_scores.php');
     break;
 }
