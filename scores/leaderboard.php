@@ -24,13 +24,13 @@ include(HTML . 'beginHTML.php');
 
   <div class="row">
     <div class="col-md-4 text-center">
-      Indiana
+      <h2>Indiana</h2>
     </div>
     <div class="col-md-4 text-center">
-      Kentucky
+      <h2>Kentucky</h2>
     </div>
     <div class="col-md-4 text-center">
-      Ohio
+      <h2>Ohio</h2>
     </div>
   </div>
 
@@ -50,7 +50,8 @@ foreach ($rows as $row) {
     <div class="col-md-4 text-center">
 <?php
   }
-  echo $row['LastName'] . ', ' . $row['FirstName'] . '<br/>' . "\n";
+  echo $row['LastName'] . ', ' . $row['FirstName'] . ($row['TotalScore'] == '' ? '' : ' (' . $row['TotalScore'] . ')');
+  echo '<br/>' . "\n";
   $oldOrganization = $row['Organization'];
   $x++;
 }

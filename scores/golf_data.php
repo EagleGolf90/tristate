@@ -21,6 +21,6 @@ $location = $courseInfo[0][3] . ', ' . $courseInfo[0][4];
 if (PAGE_NAME == 'index.php') {
   $players = $golf->getPlayers();
 } else {
-  $players = $golf->getGroups($_GET['group']);
+  $players = $golf->getGroups($roundPlayed, $_GET['group']);
 }
 ?>

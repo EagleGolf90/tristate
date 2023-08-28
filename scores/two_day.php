@@ -1,0 +1,56 @@
+<?php
+include('../preload.php');
+include('golf_data.php');
+include(HTML . 'beginHTML.php');
+?>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1><?php echo $courseInfo[0][1]; ?></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2><?php echo $date_played; ?></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3><?php echo $courseInfo[0][3] . ', ' . $courseInfo[0][4]; ?></h3>
+    </div>
+  </div>
+  <hr/>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>IDGA Two-Day Leaderboard</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">&nbsp;</div>
+    <div class="col-md-3 header">Name</div>
+    <div class="col text-center header">Round 1</div>
+    <div class="col text-center header">Round 2</div>
+    <div class="col text-center header">Final Score</div>
+    <div class="col-md-3">&nbsp;</div>
+</div>
+
+  <div class="row">
+<?php
+$rows = $golf->getTwoDayLeaderboard();
+foreach ($rows as $row) {
+?>
+    <div class="col-md-3">&nbsp;</div>
+    <div class="col-md-3"><?php echo $row['LastName'] . ', ' . $row['FirstName']; ?></div>
+    <div class="col text-center"><?php echo $row['R1']; ?></div>
+    <div class="col text-center"><?php echo $row['R2']; ?></div>
+    <div class="col text-center"><?php echo $row['TotalScore']; ?></div>
+    <div class="col-md-3">&nbsp;</div>
+<?php
+}
+?>
+  </div>
+</div>
+
+<?php include(HTML . 'endHTML.php'); ?>

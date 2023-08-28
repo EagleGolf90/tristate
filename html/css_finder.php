@@ -11,6 +11,7 @@ switch ($file_name) {
   case 'scores/enterScores.php':
   case 'scores/enterScores_mobile.php':
   case 'scores/leaderboard.php':
+  case 'scores/two_day.php':
     include(HTML . 'head_scores.php');
     break;
 }

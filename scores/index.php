@@ -41,7 +41,7 @@ for ($x = 0; $x < sizeof($players); $x++) {
       if ($score_flag) {
         $url_link = $groupPlayers;
       } else {
-        $url_link = '<a href="enterScores.php?group=' . $oldCourseID . '">' . $groupPlayers . '</a>';
+        $url_link = '<a href="enterScores.php?group=' . $oldCourseID . '&round=' . $roundPlayed . '">' . $groupPlayers . '</a>';
       }
       $score_flag = false;
 ?>
