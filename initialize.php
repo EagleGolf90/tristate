@@ -17,6 +17,7 @@ define('ROOT_PATH', dirname(__FILE__) . DS);
 define('BASE_URL', 'https://kdga.org/');
 define('TRISTATE_URL', BASE_URL . strtolower(TRISTATE) . DS);
 define('SCORES_URL', TRISTATE_URL . 'scores' . DS);
+define('MENUS_URL', TRISTATE_URL . 'menus' . DS);
 
 define('INCLUDES', ROOT_PATH . 'includes' . DS);
 define('CLASSES', ROOT_PATH . 'classes' . DS);

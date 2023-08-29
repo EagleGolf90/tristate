@@ -8,4 +8,5 @@
   .name_label { font-size: 18px; }
   .container-fluid { width: 100%; }
   .header { font-weight: bold; font-style: italic; text-decoration-line: underline; }
+  .header_link, #myHeader { font-size: 20px; text-align: center; }
   </style>

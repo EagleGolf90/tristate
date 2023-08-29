@@ -6,12 +6,18 @@ include(HTML . 'beginHTML.php');
 
 <form class="regForm" action="update_scores.php" method="post">
 <div class="container-fluid">
+  <?php include(MENUS . 'return_menu.php'); ?>
   <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
   <input type="text" name="roundPlayed" value="<?php echo $roundPlayed; ?>" hidden>
   <input type="text" name="roundID" value="<?php echo $roundID; ?>" hidden>
 <?php for ($y = 0; $y < sizeof($players); $y++) { ?>
   <input type="text" name="player[]" value="<?php echo $players[$y][2]; ?>" hidden>
 <?php } ?>
+  <div class="row header_link">
+    <div class="col-sm-12 text-center">
+      <a href="https://kdga.org/tristate/">Return to Groups</a>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-sm-12 text-center">
@@ -44,7 +50,7 @@ include(HTML . 'beginHTML.php');
 <?php for ($x = 0; $x < 18; $x++) { ?>
           <th class="scores"><?php echo $holes[$x][0]; ?></th>
 <?php } ?>
-          <th>Total</th>
+          <th>TOT</th>
         </tr>
         <tr>
           <th>&nbsp;</th>

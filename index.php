@@ -1,6 +1,6 @@
 <?php
 include('preload.php');
-$location = SCORES_URL;
+$location = MENUS_URL;
 header("Location: " . $location);
 exit;
 ?>
