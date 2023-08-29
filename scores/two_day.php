@@ -30,7 +30,7 @@ include(HTML . 'beginHTML.php');
   </div>
   <div class="row">
     <div class="col-md-2">&nbsp;</div>
-    <div class="col">Place</div>
+    <div class="col header">Place</div>
     <div class="col-md-3 header">Name</div>
     <div class="col text-center header">Round 1</div>
     <div class="col text-center header">Round 2</div>
