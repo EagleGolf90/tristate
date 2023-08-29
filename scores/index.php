@@ -33,21 +33,21 @@ include(HTML . 'beginHTML.php');
   <hr/>
 
 <?php
-$oldCourseID = '';
+$oldGroupID = '';
 $score_flag = false;
 for ($x = 0; $x < sizeof($players); $x++) {
-  if ($oldCourseID != $players[$x][0]) {
+  if ($oldGroupID != $players[$x][0]) {
     if ($x > 0) {
       if ($score_flag) {
         $url_link = $groupPlayers;
       } else {
-        $url_link = '<a href="enterScores.php?group=' . $oldCourseID . '&round=' . $roundPlayed . '">' . $groupPlayers . '</a>';
+        $url_link = '<a href="enterScores.php?group=' . $oldGroupID . '&round=' . $roundPlayed . '">' . $groupPlayers . '</a>';
       }
       $score_flag = false;
 ?>
   <div class="row">
     <div class="col-md-2">&nbsp;</div>
-    <div class="col-md-2 text-right">Group <?php echo $oldCourseID; ?></div>
+    <div class="col-md-2 text-right">Group <?php echo $oldGroupID; ?></div>
     <div class="col-md-6"><?php echo $url_link; ?></div>
     <div class="col-md-2">&nbsp;</div>
   </div>
@@ -61,7 +61,7 @@ for ($x = 0; $x < sizeof($players); $x++) {
     $groupPlayers .= ' (' . $players[$x][3] . ')';
     $score_flag = true;
   }
-  $oldCourseID = $players[$x][0];
+  $oldGroupID = $players[$x][0];
 }
 ?>
 </div>

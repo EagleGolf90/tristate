@@ -18,9 +18,15 @@ $temp_date_played = date_create($courseInfo[0][2]);
 $date_played = date_format($temp_date_played, "l, F d, Y");
 $location = $courseInfo[0][3] . ', ' . $courseInfo[0][4];
 
-if (PAGE_NAME == 'index.php') {
-  $players = $golf->getPlayers();
-} else {
-  $players = $golf->getGroups($roundPlayed, $_GET['group']);
+switch (PAGE_NAME) {
+  case PAGE_NAME == 'leaderboard.php':
+    $players = $golf->getPlayers();
+    break;
+  case 'index.php':
+    $players = $golf->getPlayers();
+    break;
+  case 'enterScores.php':
+    $players = $golf->getGroups($_GET['round'], $_GET['group']);
+    break;
 }
 ?>

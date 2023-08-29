@@ -26,14 +26,14 @@ class GolfScores {
     return $this->players;
   }
 
-  public function getLeaderboard() { return $this->sqlTable->load('loadLeaderboard', array()); }
+  public function getLeaderboard() { return $this->sqlTable->load('loadLeaderboard', array($this->roundPlayed)); }
   public function getTwoDayLeaderboard() { return $this->sqlTable->load('loadTwoDayLeaderboard', array()); }
 
   private function load() {
+    $this->loadSetup();
     $this->loadCourseInfo();
     $this->loadCourseDetails();
-    $this->loadListOfPlayers('loadListOfPlayers', array());
-    $this->loadSetup();
+    $this->loadListOfPlayers('loadListOfPlayers', array($this->roundPlayed));
   }
 
   private function loadSetup() {
