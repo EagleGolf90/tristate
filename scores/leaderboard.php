@@ -1,5 +1,6 @@
 <?php
 include('../preload.php');
+echo PAGE_NAME . '<br/>';
 include('golf_data.php');
 include(HTML . 'beginHTML.php');
 ?>

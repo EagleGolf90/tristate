@@ -10,9 +10,11 @@ class GolfScores {
 
   public function __construct() {
     $this->sqlTable = new SQLTable();
-    $this->courseInfo = array();
-    $this->courseDetails = array();
-    $this->load();
+    if (PAGE_NAME != 'add_contact.php') {
+      $this->courseInfo = array();
+      $this->courseDetails = array();
+      $this->load();
+    }
   }
 
   public function getCourseInfo() { return $this->courseInfo; }
@@ -20,6 +22,7 @@ class GolfScores {
   public function getPlayers() { return $this->players; }
   public function getRoundPlayed() { return $this->roundPlayed; }
   public function getRoundID() { return $this->roundID; }
+  public function getRounds() { return $this->sqlTable->load('loadRounds', array()); }
 
   public function getGroups($roundPlayed, $group) {
     $this->loadListOfPlayers('loadPlayersGroup', array($roundPlayed, $group));
@@ -100,6 +103,24 @@ class GolfScores {
         echo 'Player ' . $player_id . ' scores ' . $total . ' is submitted.<br/>';
       }
     }
+  }
+
+  private function generateID() {
+    $rs = $this->sqlTable->load('getUniqueID', array(BUS_UNIT, 'PlayerID'));
+    $id = 1;
+
+    foreach ($rs As $r) $id = $r['UniqueID'] + 1;
+
+    $parm = array(BUS_UNIT, 'PlayerID', $id);
+    $ret = $this->sqlTable->execute('updateUniqueID', $parm);
+
+    return $id;
+  }
+
+  public function addNames() {
+    $player_id = $this->generateID();
+    $parm = array($player_id, $_POST['firstName'], $_POST['lastName'], $_POST['org_name']);
+    $ret = $this->sqlTable->execute('addNames', $parm);
   }
 }
 ?>

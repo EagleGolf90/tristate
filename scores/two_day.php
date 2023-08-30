@@ -13,11 +13,6 @@ include(HTML . 'beginHTML.php');
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <h2><?php echo $date_played; ?></h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
       <h3><?php echo $courseInfo[0][3] . ', ' . $courseInfo[0][4]; ?></h3>
     </div>
   </div>
