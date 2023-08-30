@@ -1,7 +1,5 @@
 <?php
-if (!isset($_GET['page'])) {
-  die('Must have page parameter. Please try again.');
-}
+if (!isset($_GET['page'])) die('Must have page parameter. Please try again.');
 
 include('../preload.php');
 include('initialize_golf.php');

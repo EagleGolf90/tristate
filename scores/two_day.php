@@ -1,6 +1,9 @@
 <?php
 include('../preload.php');
-include('golf_data.php');
+include('initialize_golf.php');
+include('current_init.php');
+$rows = $golf->getTwoDayLeaderboard();
+
 include(HTML . 'beginHTML.php');
 ?>
 
@@ -34,7 +37,6 @@ include(HTML . 'beginHTML.php');
   </div>
 
 <?php
-$rows = $golf->getTwoDayLeaderboard();
 $place = 0;
 $oldScore = 0;
 $tied = 0;

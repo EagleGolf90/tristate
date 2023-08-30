@@ -1,6 +1,9 @@
 <?php
 include('../preload.php');
-include('golf_data.php');
+include('initialize_golf.php');
+include('course_init.php');
+$players = $golf->getPlayers($roundPlayed);
+
 include(HTML . 'beginHTML.php');
 ?>
 

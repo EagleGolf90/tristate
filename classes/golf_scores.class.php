@@ -6,73 +6,48 @@ class GolfScores {
   private $players;
   private $roundPlayed;
   private $roundID;
-  
+  private $courseID;  
 
   public function __construct() {
     $this->sqlTable = new SQLTable();
-    if (PAGE_NAME != 'add_contact.php') {
-      $this->courseInfo = array();
-      $this->courseDetails = array();
-      $this->load();
-    }
+    $this->courseInfo = array();
+    $this->courseDetails = array();
   }
 
-  public function getCourseInfo() { return $this->courseInfo; }
-  public function getCourseDetails() { return $this->courseDetails; }
-  public function getPlayers() { return $this->players; }
+  public function getCourseInfo($roundPlayed)
+  {
+    $this->loadCourseInfo($roundPlayed);
+    return $this->courseInfo;
+  }
+
+  public function getCourseDetails()
+  {
+    $this->loadCourseDetails();
+    return $this->courseDetails;
+  }
+
   public function getRoundPlayed() { return $this->roundPlayed; }
   public function getRoundID() { return $this->roundID; }
-  public function getRounds() { return $this->sqlTable->load('loadRounds', array()); }
+
+  public function getPlayers($roundPlayed)
+  {
+    $this->roundPlayed = $roundPlayed;
+    $this->roundID = $this.loadRoundID();
+    $this->loadListOfPlayers('loadListOfPlayers', array($roundPlayed));
+    return $this->players;
+  }
 
   public function getGroups($roundPlayed, $group) {
+    $this->roundPlayed = $roundPlayed;
+    $this->roundID = $this.loadRoundID();
     $this->loadListOfPlayers('loadPlayersGroup', array($roundPlayed, $group));
     return $this->players;
   }
 
-  public function getLeaderboard() { return $this->sqlTable->load('loadLeaderboard', array($this->roundPlayed)); }
+  public function getRounds() { return $this->sqlTable->load('loadRounds', array()); }
+  public function getLeaderboard() { return $this->sqlTable->load('loadLeaderboard', array()); }
   public function getTwoDayLeaderboard() { return $this->sqlTable->load('loadTwoDayLeaderboard', array()); }
-
-  private function load() {
-    $this->loadSetup();
-    $this->loadCourseInfo();
-    $this->loadCourseDetails();
-    $this->loadListOfPlayers('loadListOfPlayers', array($this->roundPlayed));
-  }
-
-  private function loadSetup() {
-    $rows = $this->sqlTable->load('getRounds', array());
-    foreach ($rows as $row) {
-      $this->roundPlayed = $row['RoundPlayed'];
-      $this->roundID = $row['RoundID'];
-    }
-  }
-
-  private function loadListOfPlayers($sql_name, $parm) {
-    $this->players = array();
-    $rows = $this->sqlTable->load($sql_name, $parm);
-    foreach ($rows as $row) $this->players[] = array($row['GroupID'], $row['FullName'], $row['PlayerID'], $row['TotalScore']);
-  }
-
-  private function loadCourseInfo() {
-    $rows = $this->sqlTable->load('loadCourseInfo', array());
-    foreach ($rows as $row) {
-      $this->courseInfo[] = array(
-                 $row['CourseID'],
-                 $row['CourseName'],
-                 $row['StartDate'],
-                 $row['City'],
-                 $row['State'],
-                 $row['CourseRating'],
-                 $row['SlopeRating']);
-    }
-  }
-
-  private function loadCourseDetails() {
-    $rows = $this->sqlTable->load('loadCourseDetails', array());
-    foreach ($rows as $row) {
-      $this->courseDetails[] = array($row['Par'], $row['Yards']);
-    }
-  }
+  public function checkSkins($roundPlayed) { return $this->sqlTable->load('checkSkins', array($roundPlayed)); }
 
   public function addScores() {
     $players = $_POST['player'];
@@ -105,6 +80,44 @@ class GolfScores {
     }
   }
 
+  public function addNames() {
+    $player_id = $this->generateID();
+    $parm = array($player_id, $_POST['firstName'], $_POST['lastName'], $_POST['org_name']);
+    $ret = $this->sqlTable->execute('addNames', $parm);
+  }
+
+  private function loadCourseInfo($roundPlayed) {
+    $rows = $this->sqlTable->load('loadCourseInfo', array($roundPlayed));
+    foreach ($rows as $row) {
+      $this->courseID = $row['CourseID'];
+
+      $this->courseInfo[] = array(
+                 $row['CourseID'],
+                 $row['CourseName'],
+                 $row['DatePlayed'],
+                 $row['City'],
+                 $row['State'],
+                 $row['CourseRating'],
+                 $row['SlopeRating']);
+    }
+  }
+
+  private function loadCourseDetails() {
+    $rows = $this->sqlTable->load('loadCourseDetails', array($this->courseID));
+    foreach ($rows as $row) $this->courseDetails[] = array($row['Par'], $row['Yards']);
+  }
+
+  private function loadRoundID() {
+    $rows = $this->sqlTable->load('getRoundInfo', array($this->roundPlayed));
+    foreach ($rows as $row) $this->roundID = $row['RoundID'];
+  }
+
+  private function loadListOfPlayers($sql_name, $parm) {
+    $this->players = array();
+    $rows = $this->sqlTable->load($sql_name, $parm);
+    foreach ($rows as $row) $this->players[] = array($row['GroupID'], $row['FullName'], $row['PlayerID'], $row['TotalScore']);
+  }
+
   private function generateID() {
     $rs = $this->sqlTable->load('getUniqueID', array(BUS_UNIT, 'PlayerID'));
     $id = 1;
@@ -115,12 +128,6 @@ class GolfScores {
     $ret = $this->sqlTable->execute('updateUniqueID', $parm);
 
     return $id;
-  }
-
-  public function addNames() {
-    $player_id = $this->generateID();
-    $parm = array($player_id, $_POST['firstName'], $_POST['lastName'], $_POST['org_name']);
-    $ret = $this->sqlTable->execute('addNames', $parm);
   }
 }
 ?>

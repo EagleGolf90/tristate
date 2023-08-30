@@ -1,6 +1,10 @@
 <?php
 include('../preload.php');
-include('golf_data.php');
+include('initialize_golf.php');
+include('course_init.php');
+echo '*' . $roundPlayed . '*<br/>';
+$skins = $golf->checkSkins($roundPlayed);
+
 include(HTML . 'beginHTML.php');
 ?>
 

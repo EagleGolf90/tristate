@@ -1,7 +1,8 @@
 <?php
 include('../preload.php');
-echo PAGE_NAME . '<br/>';
-include('golf_data.php');
+include('initialize_golf.php');
+include('course_init.php');
+$rows = $golf->getLeaderboard();
 include(HTML . 'beginHTML.php');
 ?>
 
@@ -38,7 +39,6 @@ include(HTML . 'beginHTML.php');
 
   <div class="row">
 <?php
-$rows = $golf->getLeaderboard();
 $oldOrganization = '';
 $x = 0;
 foreach ($rows as $row) {
