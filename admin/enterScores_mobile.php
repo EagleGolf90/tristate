@@ -1,6 +1,7 @@
 <?php
 include('../preload.php');
-include('golf_data.php');
+include(INCLUDES . 'initialize_golf.php');
+include(INCLUDES . 'course_init.php');
 include(HTML . 'beginHTML.php');
 ?>
 

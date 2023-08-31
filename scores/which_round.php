@@ -2,16 +2,22 @@
 if (!isset($_GET['page'])) die('Must have page parameter. Please try again.');
 
 include('../preload.php');
-include('initialize_golf.php');
+include(INCLUDES . 'initialize_golf.php');
 
-$script_file = $_GET['page'] . '.php';
+$script_file = TRISTATE_URL . $_GET['page'];
 
 include(HTML . 'beginHTML.php');
 ?>
 
 <form method="get" action="<?php echo $script_file; ?>" name="skinsForm">
 <div class="container">
-  <?php include(MENUS . 'return_menu.php'); ?>
+  <?php
+  if (substr($_GET['page'],0,5) == 'admin') {
+    include(MENUS . 'areturn_menu.php');
+  } else {
+    include(MENUS . 'return_menu.php');
+  }
+  ?>
   <div class="row">
     <div class="col-md-12 text-center">
       <h1>Tri-State Cup 2023</h1>
