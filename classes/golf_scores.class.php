@@ -6,7 +6,8 @@ class GolfScores {
   private $players;
   private $roundPlayed;
   private $roundID;
-  private $courseID;  
+  private $courseID;
+  private $finalCut = 0;
 
   public function __construct() {
     $this->sqlTable = new SQLTable();
@@ -27,7 +28,13 @@ class GolfScores {
     return $this->courseDetails;
   }
 
-  public function getRoundPlayed() { return $this->roundPlayed; }
+  public function getRoundPlayed() {
+    $rs = $this->sqlTable->load('getRoundInfo', array('(select MIN(RoundPlayed) from rounds where DatePlayed >= CURRENT_DATE())'));
+    $roundPlayed = 1;
+    foreach ($rs as $r) $roundPlayed = $r['RoundPlayed'];
+    return $roundPlayed;
+  }
+
   public function getRoundID() { return $this->roundID; }
 
   public function getPlayers($roundPlayed)
@@ -45,11 +52,20 @@ class GolfScores {
     return $this->players;
   }
 
-  public function getParticipants() { return $this->sqlTable->load('loadParticipants', array()); }
+  public function getFinalCut() {
+    $this->loadFinalCut();
+    return $this->finalCut;
+  }
+
+  public function getParticipants($roundPlayed) { return $this->sqlTable->load('loadParticipants', array($roundPlayed)); }
+  public function displayParticipants($roundPlayed) { return $this->sqlTable->load('displayParticipants', array($roundPlayed)); }
+
+  public function getPairings($roundPlayed) { return $this->sqlTable->load('loadPairings', array($roundPlayed)); }
+  public function displayPairings($roundPlayed) { return $this->sqlTable->load('displayPairings', array($roundPlayed)); }
+
   public function getRounds() { return $this->sqlTable->load('loadRounds', array()); }
   public function getLeaderboard() { return $this->sqlTable->load('loadLeaderboard', array()); }
   public function getTwoDayLeaderboard() { return $this->sqlTable->load('loadTwoDayLeaderboard', array()); }
-  public function displayParticipants($roundPlayed) { return $this->sqlTable->load('displayParticipants', array($roundPlayed)); }
   public function checkSkins($roundPlayed) { return $this->sqlTable->load('checkSkins', array($roundPlayed)); }
 
   public function addScores() {
@@ -92,6 +108,16 @@ class GolfScores {
   public function addParticipants() {
     $parm = array($_POST['roundPlayed'], $_POST['playerID']);
     $ret = $this->sqlTable->execute('addParticipants', $parm);
+  }
+
+  public function addPairings() {
+    $parm = array($_POST['roundPlayed'], 1, strtoupper($_POST['group']), $_POST['playerID']);
+    $ret = $this->sqlTable->execute('addPairings', $parm);
+  }
+
+  private function loadFinalCut() {
+    $rows = $this->sqlTable->load('loadFinalCut', array());
+    foreach ($rows as $row) $this->finalCut = $row['FinalCut'];
   }
 
   private function loadCourseInfo() {

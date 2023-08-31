@@ -3,10 +3,10 @@ include('../preload.php');
 
 include(CLASSES . 'golf_scores.class.php');
 $golf = new GolfScores();
-$golf->addNames();
+$golf->addPairings();
 $golf = null;
 
-$location = TRISTATE_URL;
+$location = SCORES_URL . 'addPairing.php?roundPlayed=' . $_POST['roundPlayed'];
 header("Location: " . $location);
 exit;
 ?>

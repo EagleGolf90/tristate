@@ -1,8 +1,9 @@
 <?php
 include('../preload.php');
 include('initialize_golf.php');
-$participants = $golf->getParticipants();
-$players_row = $golf->displayParticipants($roundPlayed);
+include('course_init.php');
+$participants = $golf->getParticipants($_GET['roundPlayed']);
+$players_row = $golf->displayParticipants($_GET['roundPlayed']);
 
 include(HTML . 'beginHTML.php');
 ?>
@@ -35,12 +36,20 @@ foreach ($participants as $participant) {
         </div>
       </div>
     </div>
+    <hr/>
     <div class="row">
       <div class="col-md-12">
         <table class="table table-bordered">
-<?php foreach ($players_row as $display) { ?>
+<?php
+$count = 0;
+foreach ($players_row as $display) {
+?>
         <tr><td><?php echo $display['LastName'] . ', ' . $display['FirstName']; ?></td></tr>
-<?php } ?>
+<?php
+  $count += 1;
+}
+?>
+        <tr><td><b>Total: <?php echo $count; ?></b></td></tr>
         </table>
       </div>
     </div>

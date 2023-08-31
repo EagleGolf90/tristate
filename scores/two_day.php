@@ -1,8 +1,9 @@
 <?php
 include('../preload.php');
 include('initialize_golf.php');
-include('current_init.php');
+include('course_init.php');
 $rows = $golf->getTwoDayLeaderboard();
+$finalCut = $golf->getFinalCut();
 
 include(HTML . 'beginHTML.php');
 ?>
@@ -30,8 +31,8 @@ include(HTML . 'beginHTML.php');
     <div class="col-md-2">&nbsp;</div>
     <div class="col header">Place</div>
     <div class="col-md-3 header">Name</div>
-    <div class="col text-center header">Round 1</div>
-    <div class="col text-center header">Round 2</div>
+    <div class="col text-center header">Rnd 1</div>
+    <div class="col text-center header">Rnd 2</div>
     <div class="col text-center header">Total</div>
     <div class="col-md-3">&nbsp;</div>
   </div>
@@ -47,6 +48,7 @@ foreach ($rows as $row) {
   } else {
     $tied += 1;
   }
+  if (($finalCut+1) == $place) echo '<hr/>' . "\n";
 ?>
   <div class="row">
     <div class="col-md-2">&nbsp;</div>

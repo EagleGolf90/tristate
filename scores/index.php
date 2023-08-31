@@ -67,6 +67,21 @@ for ($x = 0; $x < sizeof($players); $x++) {
   }
   $oldGroupID = $players[$x][0];
 }
+if ($oldGroupID != $players[$x][0]) {
+  if ($score_flag) {
+    $url_link = $groupPlayers;
+  } else {
+    $url_link = '<a href="enterScores.php?group=' . $oldGroupID . '&round=' . $roundPlayed . '">' . $groupPlayers . '</a>';
+  }
+?>
+  <div class="row">
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-2 text-right">Group <?php echo $oldGroupID; ?></div>
+    <div class="col-md-6"><?php echo $url_link; ?></div>
+    <div class="col-md-2">&nbsp;</div>
+  </div>
+<?php
+}
 ?>
 </div>
 

@@ -5,6 +5,8 @@ include(CLASSES . 'golf_scores.class.php');
 $golf = new GolfScores();
 $golf->addParticipants();
 $golf = null;
-?>
 
-<h3><a href="<?php echo TRISTATE_URL; ?>">Return to Groups</a></h3>
+$location = SCORES_URL . 'addParticipant.php?roundPlayed=' . $_POST['roundPlayed'];
+header("Location: " . $location);
+exit;
+?>

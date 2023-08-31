@@ -3,8 +3,10 @@ if (PAGE_NAME != 'which_page.php') {
   if (PAGE_NAME == 'enterScores.php') {
     $roundPlayed = $_GET['round'];
   } else {
-    if (isset($_GET['roundPlayed'])) {
+    if (PAGE_NAME != 'two_day.php' && PAGE_NAME != 'leaderboard.php') {
       $roundPlayed = $_GET['roundPlayed'];
+    } else {
+      $roundPlayed = $golf->getRoundPlayed();
     }
   }
 
