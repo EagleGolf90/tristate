@@ -21,6 +21,5 @@ if (PAGE_NAME != 'which_page.php') {
   $temp_date_played = date_create($courseInfo[0][2]);
   $date_played = date_format($temp_date_played, "l, F d, Y");
   $location = $courseInfo[0][3] . ', ' . $courseInfo[0][4]; 
-  $roundID = $golf->getRoundID();
 }
 ?>

@@ -1,0 +1,55 @@
+<?php
+include('../preload.php');
+include('initialize_golf.php');
+$participants = $golf->getParticipants();
+$players_row = $golf->displayParticipants($roundPlayed);
+
+include(HTML . 'beginHTML.php');
+?>
+
+<form class="regForm" action="add_participant.php" method="post">
+  <input type="number" name="roundPlayed" value="<?php echo $_GET['roundPlayed']; ?>" hidden>
+  <div class="container-form">
+    <?php include(MENUS . 'return_menu.php'); ?>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3>Add Participant</h3>
+      </div>
+    </div>
+
+    <div row="row">
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+          <select name="playerID" class="form-control">
+            <option value="0" selected>Select one</option>
+<?php
+foreach ($participants as $participant) {
+?>
+            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $participant['LastName'] . ', ' . $participant['FirstName']; ?></option>
+<?php
+}
+?>
+          </select>
+          <label for="playerID">Name</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered">
+<?php foreach ($players_row as $display) { ?>
+        <tr><td><?php echo $display['LastName'] . ', ' . $display['FirstName']; ?></td></tr>
+<?php } ?>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<?php include(HTML . 'endHTML.php'); ?>

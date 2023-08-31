@@ -3,6 +3,7 @@ include('../preload.php');
 include('initialize_golf.php');
 include('course_init.php');
 $rows = $golf->getLeaderboard();
+
 include(HTML . 'beginHTML.php');
 ?>
 

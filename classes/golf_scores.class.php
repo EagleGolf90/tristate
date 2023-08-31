@@ -16,7 +16,8 @@ class GolfScores {
 
   public function getCourseInfo($roundPlayed)
   {
-    $this->loadCourseInfo($roundPlayed);
+    $this->roundPlayed = $roundPlayed;
+    $this->loadCourseInfo();
     return $this->courseInfo;
   }
 
@@ -32,21 +33,23 @@ class GolfScores {
   public function getPlayers($roundPlayed)
   {
     $this->roundPlayed = $roundPlayed;
-    $this->roundID = $this.loadRoundID();
+    $this->loadRoundID();
     $this->loadListOfPlayers('loadListOfPlayers', array($roundPlayed));
     return $this->players;
   }
 
   public function getGroups($roundPlayed, $group) {
     $this->roundPlayed = $roundPlayed;
-    $this->roundID = $this.loadRoundID();
+    $this->loadRoundID();
     $this->loadListOfPlayers('loadPlayersGroup', array($roundPlayed, $group));
     return $this->players;
   }
 
+  public function getParticipants() { return $this->sqlTable->load('loadParticipants', array()); }
   public function getRounds() { return $this->sqlTable->load('loadRounds', array()); }
   public function getLeaderboard() { return $this->sqlTable->load('loadLeaderboard', array()); }
   public function getTwoDayLeaderboard() { return $this->sqlTable->load('loadTwoDayLeaderboard', array()); }
+  public function displayParticipants($roundPlayed) { return $this->sqlTable->load('displayParticipants', array($roundPlayed)); }
   public function checkSkins($roundPlayed) { return $this->sqlTable->load('checkSkins', array($roundPlayed)); }
 
   public function addScores() {
@@ -86,8 +89,13 @@ class GolfScores {
     $ret = $this->sqlTable->execute('addNames', $parm);
   }
 
-  private function loadCourseInfo($roundPlayed) {
-    $rows = $this->sqlTable->load('loadCourseInfo', array($roundPlayed));
+  public function addParticipants() {
+    $parm = array($_POST['roundPlayed'], $_POST['playerID']);
+    $ret = $this->sqlTable->execute('addParticipants', $parm);
+  }
+
+  private function loadCourseInfo() {
+    $rows = $this->sqlTable->load('loadCourseInfo', array($this->roundPlayed));
     foreach ($rows as $row) {
       $this->courseID = $row['CourseID'];
 

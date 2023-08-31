@@ -10,11 +10,13 @@ switch ($file_name) {
     include(HTML . 'head_admin.php');
     break;
   case 'scores/index.php':
-  case 'scores/test1.php':
+  case 'scores/skins.php':
   case 'scores/enterScores.php':
   case 'scores/enterScores_mobile.php':
   case 'scores/leaderboard.php':
   case 'scores/two_day.php':
+  case 'scores/addParticipant.php':
+  case 'scores/which_round.php':
     include(HTML . 'head_scores.php');
     break;
 }

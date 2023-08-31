@@ -4,7 +4,7 @@ if (!isset($_GET['page'])) die('Must have page parameter. Please try again.');
 include('../preload.php');
 include('initialize_golf.php');
 
-$script_file = strtolower($_GET['page']) . '.php';
+$script_file = $_GET['page'] . '.php';
 
 include(HTML . 'beginHTML.php');
 ?>
