@@ -6,7 +6,7 @@ $golf = new GolfScores();
 $golf->addNames();
 $golf = null;
 
-$location = TRISTATE_URL;
+$location = ADMIN_URL  . 'addContacts.php';
 header("Location: " . $location);
 exit;
 ?>

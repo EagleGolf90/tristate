@@ -38,7 +38,7 @@ include(HTML . 'beginHTML.php');
 <?php
 foreach ($pairings as $pairing) {
 ?>
-            <option value="<?php echo $pairing['PlayerID']; ?>"><?php echo $pairing['LastName'] . ', ' . $pairing['FirstName']; ?></option>
+            <option value="<?php echo $pairing['PlayerID']; ?>"><?php echo $pairing['LastName'] . ', ' . $pairing['FirstName'] . ' (' . $pairing['Organization'] . ')'; ?></option>
 <?php
 }
 ?>
@@ -58,10 +58,18 @@ foreach ($pairings as $pairing) {
         <table class="table table-bordered">
 <?php
 $count = 0;
+$oldGroupID = '';
 foreach ($players_row as $display) {
+  if ($oldGroupID != $display['GroupID']) {
+    $delete_link = 'delete_pairings.php?round=' . $roundPlayed . '&group=' . $display['GroupID'];
 ?>
-        <tr><td>Group <?php echo $display['GroupID']; ?></td><td><?php echo $display['LastName'] . ', ' . $display['FirstName']; ?></td></tr>
+        <tr class="pairing_header"><td>Group <?php echo $display['GroupID']; ?></td><td style="text-align: right"><a href="<?php echo $delete_link; ?>">Delete</a></td></tr>
 <?php
+  }
+?>
+        <tr><td><?php echo $display['Organization']; ?></td><td><?php echo $display['LastName'] . ', ' . $display['FirstName']; ?></td></tr>
+<?php
+  $oldGroupID = $display['GroupID'];
   $count += 1;
 }
 ?>

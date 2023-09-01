@@ -10,4 +10,5 @@
   .header { font-weight: bold; font-style: italic; text-decoration-line: underline; }
   .header_link, #myHeader { font-size: 20px; text-align: center; }
   .container-form { width: 500px; margin-left: 35%; }
+  tr.pairing_header { background-color: #ff8000; font-weight: bold; }
   </style>

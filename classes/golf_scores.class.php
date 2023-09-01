@@ -117,6 +117,8 @@ class GolfScores {
     $ret = $this->sqlTable->execute('addPairings', $parm);
   }
 
+  public function deletePairings($roundPlayed, $group) { return $this->sqlTable->execute('deletePairings', array($roundPlayed, $group)); }
+
   private function loadFinalCut() {
     $rows = $this->sqlTable->load('loadFinalCut', array());
     foreach ($rows as $row) $this->finalCut = $row['FinalCut'];

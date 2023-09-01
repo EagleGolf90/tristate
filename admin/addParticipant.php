@@ -27,7 +27,7 @@ include(HTML . 'beginHTML.php');
 <?php
 foreach ($participants as $participant) {
 ?>
-            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $participant['LastName'] . ', ' . $participant['FirstName']; ?></option>
+            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $participant['LastName'] . ', ' . $participant['FirstName'] . ' (' . $participant['Organization'] . ')'; ?></option>
 <?php
 }
 ?>
@@ -44,7 +44,7 @@ foreach ($participants as $participant) {
 $count = 0;
 foreach ($players_row as $display) {
 ?>
-        <tr><td><?php echo $display['LastName'] . ', ' . $display['FirstName']; ?></td></tr>
+        <tr><td><?php echo $display['LastName'] . ', ' . $display['FirstName'] . ' (' . $display['Organization'] . ')'; ?></td></tr>
 <?php
   $count += 1;
 }

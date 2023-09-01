@@ -6,7 +6,7 @@ $golf = new GolfScores();
 $golf->addParticipants();
 $golf = null;
 
-$location = SCORES_URL . 'addParticipant.php?roundPlayed=' . $_POST['roundPlayed'];
+$location = ADMIN_URL . 'addParticipant.php?roundPlayed=' . $_POST['roundPlayed'];
 header("Location: " . $location);
 exit;
 ?>
