@@ -60,6 +60,8 @@ class GolfScores {
   public function getParticipants($roundPlayed) { return $this->sqlTable->load('loadParticipants', array($roundPlayed)); }
   public function displayParticipants($roundPlayed) { return $this->sqlTable->load('displayParticipants', array($roundPlayed)); }
 
+  public function displayContacts() { return $this->sqlTable->load('displayContacts', array()); }
+
   public function getPairings($roundPlayed) { return $this->sqlTable->load('loadPairings', array($roundPlayed)); }
   public function displayPairings($roundPlayed) { return $this->sqlTable->load('displayPairings', array($roundPlayed)); }
 

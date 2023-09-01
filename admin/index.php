@@ -5,7 +5,7 @@ include(HTML . 'beginHTML.php');
 
 $sqlTable = new SQLTable();
 ?>
-<div class="container">
+<div class="container text-center">
   <h2>IDGA / Tri-State Cup Main Menu (Admin)</h2>
   <div class="row">
 <?php
@@ -14,6 +14,7 @@ foreach ($rows As $row) {
   $url_menu = TRISTATE_URL . $row['URL'];
 ?>
   <div class="row">
+    <div class="col-3">&nbsp;</div>
     <div class="col-6">
       <a class="links" href="<?php echo $url_menu; ?>">
         <div class="card <?php echo $row['TagName']; ?> text-white mb-1 full">
@@ -23,7 +24,7 @@ foreach ($rows As $row) {
         </div>
       </a>
     </div>
-    <div class="col-6">&nbsp;</div>
+    <div class="col-3">&nbsp;</div>
   </div>
 <?php
 }
