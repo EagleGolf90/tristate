@@ -11,7 +11,7 @@ include(HTML . 'beginHTML.php');
 <form class="regForm" action="add_participant.php" method="post">
   <input type="number" name="roundPlayed" value="<?php echo $_GET['roundPlayed']; ?>" hidden>
   <div class="container-form">
-    <?php include(MENUS . 'areturn_menu.php'); ?>
+    <?php include(MENUS . 'return_menu.php'); ?>
 
     <div class="row">
       <div class="col-md-12 text-center">

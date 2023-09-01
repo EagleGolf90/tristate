@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('bus_unit/load_tristate.php');
 include(INCLUDES . 'utilities.php');
 include('initialize.php');

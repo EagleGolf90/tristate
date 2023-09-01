@@ -1,5 +1,6 @@
 <?php
 include('../preload.php');
+$_SESSION["RETURN_MENU"] = MENUS_URL;
 include(HTML . 'beginHTML.php');
 
 $sqlTable = new SQLTable();

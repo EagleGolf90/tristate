@@ -13,7 +13,7 @@ include(HTML . 'beginHTML.php');
   <input type="number" name="holeNumber" value="1" hidden>
 
   <div class="container-form">
-    <?php include(MENUS . 'areturn_menu.php'); ?>
+    <?php include(MENUS . 'return_menu.php'); ?>
 
     <div class="row">
       <div class="col-md-12 text-center">

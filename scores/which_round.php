@@ -11,13 +11,7 @@ include(HTML . 'beginHTML.php');
 
 <form method="get" action="<?php echo $script_file; ?>" name="skinsForm">
 <div class="container">
-  <?php
-  if (substr($_GET['page'],0,5) == 'admin') {
-    include(MENUS . 'areturn_menu.php');
-  } else {
-    include(MENUS . 'return_menu.php');
-  }
-  ?>
+  <?php include(MENUS . 'return_menu.php'); ?>
   <div class="row">
     <div class="col-md-12 text-center">
       <h1>Tri-State Cup 2023</h1>
