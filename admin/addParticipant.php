@@ -36,6 +36,11 @@ foreach ($participants as $participant) {
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </div>
+    </div>
     <hr/>
     <div class="row">
       <div class="col-md-12">
@@ -51,11 +56,6 @@ foreach ($players_row as $display) {
 ?>
         <tr><td><b>Total: <?php echo $count; ?></b></td></tr>
         </table>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
       </div>
     </div>
   </div>
