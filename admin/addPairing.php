@@ -1,7 +1,7 @@
 <?php
 include('../preload.php');
-include('initialize_golf.php');
-include('course_init.php');
+include(INCLUDES . 'initialize_golf.php');
+include(INCLUDES . 'course_init.php');
 $pairings = $golf->getPairings($_GET['roundPlayed']);
 $players_row = $golf->displayPairings($_GET['roundPlayed']);
 
