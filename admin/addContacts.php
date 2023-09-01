@@ -1,6 +1,8 @@
 <?php
 include('../preload.php');
-include(CLASSES . 'golf_scores.class.php');
+include(INCLUDES . 'initialize_golf.php');
+$contacts_row = $golf->displayContacts();
+
 include(HTML . 'beginHTML.php');
 ?>
 
@@ -38,6 +40,27 @@ include(HTML . 'beginHTML.php');
     <div class="row">
       <div class="col-md-12 text-center">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </div>
+    </div>
+
+    <hr/>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered">
+<?php
+$count = 0;
+foreach ($contacts_row as $contact) {
+?>
+        <tr>
+          <td><?php echo $contact['LastName'] . ', ' . $contact['FirstName']; ?></td>
+          <td><?php echo $contact['Organization']; ?></td>
+        </tr>
+<?php
+  $count += 1;
+}
+?>
+        <tr><td colspan="2"><b>Total: <?php echo $count; ?></b></td></tr>
+        </table>
       </div>
     </div>
   </div>
