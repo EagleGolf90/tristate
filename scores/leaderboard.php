@@ -3,12 +3,14 @@ include('../preload.php');
 include(INCLUDES . 'initialize_golf.php');
 include(INCLUDES . 'course_init.php');
 $rows = $golf->getLeaderboard();
+$teams = $golf->getTeamScores();
 
 include(HTML . 'beginHTML.php');
 ?>
 
 <div class="container">
   <?php include(MENUS . 'return_menu.php'); ?>
+
   <div class="row">
     <div class="col-md-12 text-center">
       <h1><?php echo $courseInfo[0][1]; ?></h1>
@@ -26,17 +28,7 @@ include(HTML . 'beginHTML.php');
   </div>
   <hr/>
 
-  <div class="row">
-    <div class="col-md-4 text-center">
-      <h2>Indiana</h2>
-    </div>
-    <div class="col-md-4 text-center">
-      <h2>Kentucky</h2>
-    </div>
-    <div class="col-md-4 text-center">
-      <h2>Ohio</h2>
-    </div>
-  </div>
+  <?php include('team_score.php'); ?>
 
   <div class="row">
 <?php

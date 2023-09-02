@@ -35,7 +35,13 @@ class GolfScores {
     return $roundPlayed;
   }
 
-  public function getRoundID() { return $this->roundID; }
+  public function getRoundID($roundPlayed) {
+    $this->roundPlayed = $roundPlayed;
+    $this->loadRoundID();
+    return $this->roundID;
+  }
+
+  public function getTeamScores() { return $this->sqlTable->load('loadTeams', array()); }
 
   public function getPlayers($roundPlayed)
   {

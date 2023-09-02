@@ -8,5 +8,5 @@ $golf = null;
 
 $location = ADMIN_URL . 'groups.php?roundPlayed=' . $_POST['roundPlayed'];
 header("Location: " . $location);
-exit;
+exit();
 ?>

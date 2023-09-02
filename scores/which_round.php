@@ -11,12 +11,11 @@ include(HTML . 'beginHTML.php');
 
 <form method="get" action="<?php echo $script_file; ?>" name="skinsForm">
 <div class="container">
-  <?php include(MENUS . 'return_menu.php'); ?>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h1>Tri-State Cup 2023</h1>
-    </div>
-  </div>
+  <?php
+  include(MENUS . 'return_menu.php');
+  $page_title = 'Tri-State Cup 2023';
+  include(INCLUDES . 'page_title.php');
+  ?>
   <hr/>
 
   <div class="row">

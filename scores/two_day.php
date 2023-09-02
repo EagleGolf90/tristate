@@ -10,6 +10,7 @@ include(HTML . 'beginHTML.php');
 
 <div class="container">
   <?php include(MENUS . 'return_menu.php'); ?>
+
   <div class="row">
     <div class="col-md-12 text-center">
       <h1><?php echo $courseInfo[0][1]; ?></h1>
@@ -22,11 +23,11 @@ include(HTML . 'beginHTML.php');
   </div>
   <hr/>
 
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h2>IDGA Two-Day Leaderboard</h2>
-    </div>
-  </div>
+  <?php
+  $page_title = 'IDGA Two-Day Leaderboard';
+  include(INCLUDES . 'page_title.php');
+  ?>
+
   <div class="row">
     <div class="col-md-2">&nbsp;</div>
     <div class="col header">Place</div>
