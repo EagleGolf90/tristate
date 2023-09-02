@@ -8,22 +8,18 @@ include(HTML . 'beginHTML.php');
 ?>
 
 <div class="container">
-  <?php include(MENUS . 'return_menu.php'); ?>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h1><?php echo $courseInfo[0][1]; ?></h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h2><?php echo $date_played; ?></h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h3><?php echo $courseInfo[0][3] . ', ' . $courseInfo[0][4]; ?></h3>
-    </div>
-  </div>
+  <?php
+  include(MENUS . 'return_menu.php');
+
+  $display_message = '<h1>' . $courseInfo[0][1] . '</h1>';
+  include(INCLUDES . 'display_message.php');
+
+  $display_message = '<h2>' . $date_played . '</h2>';
+  include(INCLUDES . 'display_message.php');
+
+  $display_message = '<h3>' . $courseInfo[0][3] . ', ' . $courseInfo[0][4] . '</h3>';
+  include(INCLUDES . 'display_message.php');
+  ?>
   <hr/>
 
 <?php

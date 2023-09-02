@@ -8,13 +8,11 @@ include(HTML . 'beginHTML.php');
 
 <form class="regForm" action="add_contact.php" method="post">
   <div class="container-form">
-    <?php include(MENUS . 'return_menu.php'); ?>
-
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h3>Add Contact</h3>
-      </div>
-    </div>
+    <?php
+    include(MENUS . 'return_menu.php');
+    $display_message = '<h3>Add Contact</h3>';
+    include(INCLUDES . 'display_message.php');
+    ?>
 
     <div row="row">
       <div class="col-md-12">

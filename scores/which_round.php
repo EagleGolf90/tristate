@@ -13,8 +13,8 @@ include(HTML . 'beginHTML.php');
 <div class="container">
   <?php
   include(MENUS . 'return_menu.php');
-  $page_title = 'Tri-State Cup 2023';
-  include(INCLUDES . 'page_title.php');
+  $display_message = '<h1>Tri-State Cup 2023</h1>';
+  include(INCLUDES . 'display_message.php');
   ?>
   <hr/>
 

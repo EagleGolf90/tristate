@@ -9,6 +9,7 @@ include(HTML . 'beginHTML.php');
 
 <div class="container">
   <?php include(MENUS . 'return_menu.php'); ?>
+
   <div class="row">
     <div class="col-md-12 text-center">
       <h1><?php echo $courseInfo[0][1]; ?></h1>
