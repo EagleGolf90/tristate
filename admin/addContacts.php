@@ -37,11 +37,8 @@ include(HTML . 'beginHTML.php');
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-      </div>
-    </div>
+
+    <?php include(INCLUDES . 'submit_button.php'); ?>
 
     <hr/>
     <div class="row">
