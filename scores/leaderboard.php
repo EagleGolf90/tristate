@@ -34,8 +34,11 @@ include(HTML . 'beginHTML.php');
 <?php
 $oldOrganization = '';
 $x = 0;
+$team_cut = 0;
 foreach ($rows as $row) {
+  if ($team_cut == 4) echo '<hr/>' . "\n";
   if ($oldOrganization != $row['Organization']) {
+    $team_cut = 0;
     if ($x > 0) {
 ?>
     </div>
@@ -49,6 +52,7 @@ foreach ($rows as $row) {
   echo '<br/>' . "\n";
   $oldOrganization = $row['Organization'];
   $x++;
+  $team_cut++;
 }
 ?>
   </div>

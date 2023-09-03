@@ -46,7 +46,6 @@ foreach ($rows as $row) {
   } else {
     $tied += 1;
   }
-  if (($finalCut+1) == $place) echo '<hr/>' . "\n";
 ?>
   <div class="row">
     <div class="col-md-2">&nbsp;</div>
