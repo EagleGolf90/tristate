@@ -11,13 +11,11 @@ include(HTML . 'beginHTML.php');
 <form class="regForm" action="add_participant.php" method="post">
   <input type="number" name="roundPlayed" value="<?php echo $_GET['roundPlayed']; ?>" hidden>
   <div class="container-form">
-    <?php include(MENUS . 'return_menu.php'); ?>
-
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h3>Add Participant</h3>
-      </div>
-    </div>
+    <?php
+    include(MENUS . 'return_menu.php');
+    $display_message = '<h3>Add Participant</h3>';
+    include(INCLUDES . 'display_message.php');
+    ?>
 
     <div row="row">
       <div class="col-md-12">

@@ -35,7 +35,13 @@ class GolfScores {
     return $roundPlayed;
   }
 
-  public function getRoundID() { return $this->roundID; }
+  public function getRoundID($roundPlayed) {
+    $this->roundPlayed = $roundPlayed;
+    $this->loadRoundID();
+    return $this->roundID;
+  }
+
+  public function getTeamScores() { return $this->sqlTable->load('loadTeams', array()); }
 
   public function getPlayers($roundPlayed)
   {
@@ -78,46 +84,36 @@ class GolfScores {
     foreach ($players as $key => $value) {
       $player_id = $value;
 
-      $tag_name = '';
-      if ($value < 100) $tag_name = '0' . $value;
-      if ($value < 10) $tag_name = '00' . $value;
-    
+      $tag_name = $this->concatenateZeros($value);
       $score_id = $_POST['scores' . $tag_name];
+
       $hole = 1;
-      $total = 0;
+      $totalScore = 0;
 
       foreach ($score_id as $key => $value) {
-        $total += $value;
+        $totalScore += $value;
         $parm = array($player_id, $round_played, $round_id, $hole, $value);
         $ret = $this->sqlTable->execute('addScores', $parm);
         $hole++;
       }
 
-      $parm = array($round_played, $player_id, $total);
+      $parm = array($round_played, $player_id, $totalScore);
       $ret = $this->sqlTable->execute('updateScores', $parm);
-      if ($ret == 1) {
-        echo 'Player ' . $player_id . ' scores ' . $total . ' is submitted.<br/>';
-      }
+      if ($ret == 1) echo 'Player ' . $player_id . ' scores ' . $totalScore . ' is submitted.<br/>';
     }
   }
 
-  public function addNames() {
-    $player_id = $this->generateID();
-    $parm = array($player_id, $_POST['firstName'], $_POST['lastName'], $_POST['org_name']);
-    $ret = $this->sqlTable->execute('addNames', $parm);
-  }
-
-  public function addParticipants() {
-    $parm = array($_POST['roundPlayed'], $_POST['playerID']);
-    $ret = $this->sqlTable->execute('addParticipants', $parm);
-  }
-
-  public function addPairings() {
-    $parm = array($_POST['roundPlayed'], 1, strtoupper($_POST['group']), $_POST['playerID']);
-    $ret = $this->sqlTable->execute('addPairings', $parm);
-  }
-
+  public function addNames() { $ret = $this->sqlTable->execute('addNames', array($this->generateID(), $_POST['firstName'], $_POST['lastName'], $_POST['org_name'])); }
+  public function addParticipants() { $ret = $this->sqlTable->execute('addParticipants', array($_POST['roundPlayed'], $_POST['playerID'])); }
+  public function addPairings() { $ret = $this->sqlTable->execute('addPairings', array($_POST['roundPlayed'], 1, strtoupper($_POST['group']), $_POST['playerID'])); }
   public function deletePairings($roundPlayed, $group) { return $this->sqlTable->execute('deletePairings', array($roundPlayed, $group)); }
+
+  private function concatenateZeros($value) {
+    $temp_value = '';
+    if ($value < 100) $temp_value = '0' . $value;
+    if ($value < 10) $temp_value = '00' . $value;
+    return $temp_value;
+  }
 
   private function loadFinalCut() {
     $rows = $this->sqlTable->load('loadFinalCut', array());
@@ -142,7 +138,7 @@ class GolfScores {
 
   private function loadCourseDetails() {
     $rows = $this->sqlTable->load('loadCourseDetails', array($this->courseID));
-    foreach ($rows as $row) $this->courseDetails[] = array($row['Par'], $row['Yards']);
+    foreach ($rows as $row) $this->courseDetails[] = array($row['Par'], $row['Yards'], $row['Handicap']);
   }
 
   private function loadRoundID() {
@@ -158,12 +154,11 @@ class GolfScores {
 
   private function generateID() {
     $rs = $this->sqlTable->load('getUniqueID', array(BUS_UNIT, 'PlayerID'));
-    $id = 1;
 
+    $id = 1;
     foreach ($rs As $r) $id = $r['UniqueID'] + 1;
 
-    $parm = array(BUS_UNIT, 'PlayerID', $id);
-    $ret = $this->sqlTable->execute('updateUniqueID', $parm);
+    $ret = $this->sqlTable->execute('updateUniqueID', array(BUS_UNIT, 'PlayerID', $id));
 
     return $id;
   }
