@@ -7,12 +7,11 @@ $teams = $golf->getTeamScores();
 $final_cut = $golf->getFinalCut();
 
 include(HTML . 'beginHTML.php');
+include(MENUS . 'navbar.php');
 ?>
 
 <div class="container">
   <?php
-  include(MENUS . 'return_menu.php');
-
   $display_message = '<h1>' . $courseInfo[0][1] . '</h1>';
   include(INCLUDES . 'display_message.php');
 

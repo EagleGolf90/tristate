@@ -7,12 +7,12 @@ include(INCLUDES . 'initialize_golf.php');
 $script_file = TRISTATE_URL . $_GET['page'];
 
 include(HTML . 'beginHTML.php');
+include(MENUS . 'navbar.php');
 ?>
 
 <form method="get" action="<?php echo $script_file; ?>" name="skinsForm">
 <div class="container">
   <?php
-  include(MENUS . 'return_menu.php');
   $display_message = '<h1>Tri-State Cup 2023</h1>';
   include(INCLUDES . 'display_message.php');
   ?>

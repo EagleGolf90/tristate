@@ -6,6 +6,7 @@ $pairings = $golf->getPairings($_GET['roundPlayed']);
 $players_row = $golf->displayPairings($_GET['roundPlayed']);
 
 include(HTML . 'beginHTML.php');
+include(MENUS . 'navbar.php');
 ?>
 
 <form class="regForm" action="add_pairing.php" method="post">
@@ -14,7 +15,6 @@ include(HTML . 'beginHTML.php');
 
   <div class="container-form">
     <?php
-    include(MENUS . 'return_menu.php');
     $display_message = '<h3>Add Pairing</h3>';
     include(INCLUDES . 'display_message.php');
     ?>

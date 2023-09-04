@@ -63,8 +63,8 @@ class GolfScores {
     return $this->finalCut;
   }
 
-  public function getParticipants($roundPlayed) { return $this->sqlTable->load('loadParticipants', array($roundPlayed)); }
-  public function displayParticipants($roundPlayed) { return $this->sqlTable->load('displayParticipants', array($roundPlayed)); }
+  public function getParticipants() { return $this->sqlTable->load('loadParticipants', array()); }
+  public function displayParticipants() { return $this->sqlTable->load('displayParticipants', array()); }
 
   public function displayContacts() { return $this->sqlTable->load('displayContacts', array()); }
 
@@ -104,7 +104,26 @@ class GolfScores {
   }
 
   public function addNames() { $ret = $this->sqlTable->execute('addNames', array($this->generateID(), $_POST['firstName'], $_POST['lastName'], $_POST['org_name'])); }
-  public function addParticipants() { $ret = $this->sqlTable->execute('addParticipants', array($_POST['roundPlayed'], $_POST['playerID'])); }
+
+  private function addParticipantsRound($roundID) {
+    $rows = $this->sqlTable->load('selectRoundPlayed', array($roundID));
+    $roundPlayed = 1;
+    foreach ($rows as $row) $roundPlayed = $row['RoundPlayed'];
+    $ret = $this->sqlTable->execute('addParticipants', array($roundPlayed, $_POST['playerID']));
+  }
+
+  public function addParticipants()
+  {
+    $this->addParticipantsRound(1);
+    if ($_POST['player_choice'] == '2') $this->addParticipantsRound(2);
+    $ret = $this->sqlTable->execute('addPlayersChoice', array($_POST['playerID'], $_POST['player_choice']));
+  }
+
+  public function deleteParticipant($playerID) {
+    $this->sqlTable->execute('deleteParticipant', array($playerID));
+    $this->sqlTable->execute('deletePlayersChoice', array($playerID));
+  }
+
   public function addPairings() { $ret = $this->sqlTable->execute('addPairings', array($_POST['roundPlayed'], 1, strtoupper($_POST['group']), $_POST['playerID'])); }
   public function deletePairings($roundPlayed, $group) { return $this->sqlTable->execute('deletePairings', array($roundPlayed, $group)); }
 

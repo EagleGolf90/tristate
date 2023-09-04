@@ -1,34 +1,11 @@
 <?php
 include('../preload.php');
-$_SESSION["RETURN_MENU"] = ADMIN_URL;
 include(HTML . 'beginHTML.php');
+include(MENUS . 'navbar.php');
+?>
 
-$sqlTable = new SQLTable();
-?>
-<div class="container text-center">
-  <h2>IDGA / Tri-State Cup Main Menu (Admin)</h2>
-  <div class="row">
-<?php
-$rows = $sqlTable->load('loadAdminMenus', array());
-foreach ($rows As $row) {
-  $url_menu = TRISTATE_URL . $row['URL'];
-?>
-  <div class="row">
-    <div class="col-3">&nbsp;</div>
-    <div class="col-6">
-      <a class="links" href="<?php echo $url_menu; ?>">
-        <div class="card <?php echo $row['TagName']; ?> text-white mb-1 full">
-          <div class="card-body">
-            <h5 class="card-title text-center"><?php echo $row['Title'] . ($row['Admin'] == 'Y' ? ' (for Admin only)' : ''); ?></h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-3">&nbsp;</div>
-  </div>
-<?php
-}
-?>
+<div class="container">
+  <h2>Tri-State Cup / IDGA Two-Day Tournament</h2>
 </div>
 
 <?php include(HTML . 'endHTML.php'); ?>

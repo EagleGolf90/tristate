@@ -5,11 +5,11 @@ include(INCLUDES . 'course_init.php');
 $players = $golf->getGroups($roundPlayed, $_GET['group']);
 
 include(HTML . 'beginHTML.php');
+include(MENUS . 'navbar.php');
 ?>
 
 <form class="regForm" action="update_scores.php" method="post">
 <div class="container-fluid">
-  <?php include(MENUS . 'return_menu.php'); ?>
   <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
   <input type="text" name="roundPlayed" value="<?php echo $roundPlayed; ?>" hidden>
   <input type="text" name="roundID" value="<?php echo $roundID; ?>" hidden>

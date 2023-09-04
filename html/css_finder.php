@@ -4,7 +4,7 @@ $file_name = str_replace(DS . 'tristate' . DS, "", $name_url);
 
 switch ($file_name) {
   case 'menus/index.php':
-  case 'admin/index.php':
+  // case 'admin/index.php':
     include(HTML . 'head_menus.php');
     break;
   //   include(HTML . 'head_admin.php');

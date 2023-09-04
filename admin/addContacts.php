@@ -4,12 +4,12 @@ include(INCLUDES . 'initialize_golf.php');
 $contacts_row = $golf->displayContacts();
 
 include(HTML . 'beginHTML.php');
+include(MENUS . 'navbar.php');
 ?>
 
 <form class="regForm" action="add_contact.php" method="post">
   <div class="container-form">
     <?php
-    include(MENUS . 'return_menu.php');
     $display_message = '<h3>Add Contact</h3>';
     include(INCLUDES . 'display_message.php');
     ?>
