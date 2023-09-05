@@ -1,0 +1,30 @@
+<?php
+if (isset($_POST['page'])) {
+  die('Must have page parameter. Please try again.');
+}
+
+include('../preload.php');
+
+include(CLASSES . 'golf_scores.class.php');
+$golf = new GolfScores();
+
+$location = ADMIN_URL;
+switch (strtolower($_POST['page'])) {
+  case 'contact':
+    $golf->addNames();
+    $location .= 'addContacts.php';
+    break;
+  case 'participant':
+    $golf->addParticipants();
+    $location .= 'addParticipant.php?roundPlayed=' . $_POST['roundPlayed'];
+    break;
+  case 'pairing':
+    $golf->addPairings();
+    $location .= 'addPairing.php?roundPlayed=' . $_POST['roundPlayed'];
+    break;
+}
+$golf = null;
+
+header("Location: " . $location);
+exit;
+?>

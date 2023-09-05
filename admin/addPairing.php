@@ -11,7 +11,8 @@ include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
 ?>
 
-<form class="regForm" action="add_pairing.php" method="post">
+<form class="regForm" action="add.php" method="post">
+  <input type="text" name="page" value="pairing" hidden>
   <input type="number" name="roundPlayed" value="<?php echo $_GET['roundPlayed']; ?>" hidden>
   <input type="number" name="holeNumber" value="1" hidden>
 

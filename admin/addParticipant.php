@@ -8,7 +8,8 @@ include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
 ?>
 
-<form class="regForm" action="add_participant.php" method="post">
+<form class="regForm" action="add.php" method="post">
+  <input type="text" name="page" value="participant" hidden>
   <div class="container-list">
     <?php
     $display_message = '<h3>Add Participant</h3>';
