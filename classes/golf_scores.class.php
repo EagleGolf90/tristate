@@ -124,7 +124,7 @@ class GolfScores {
     $this->sqlTable->execute('deletePlayersChoice', array($playerID));
   }
 
-  public function addPairings() { $ret = $this->sqlTable->execute('addPairings', array($_POST['roundPlayed'], 1, strtoupper($_POST['group']), $_POST['playerID'])); }
+  public function addPairings() { $ret = $this->sqlTable->execute('addPairings', array($_POST['roundPlayed'], 1, strtoupper($_POST['groupID']), $_POST['playerID'])); }
   public function deletePairings($roundPlayed, $group) { return $this->sqlTable->execute('deletePairings', array($roundPlayed, $group)); }
 
   private function countPlayers() {

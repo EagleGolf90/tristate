@@ -24,7 +24,7 @@ include(MENUS . 'navbar.php');
     <div row="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <select name="playerID" class="form-control">
+          <select name="groupID" class="form-control">
             <option value="0" selected>Select one</option>
 <?php
 for ($x = 0; $x < $groupSize; $x++) {
