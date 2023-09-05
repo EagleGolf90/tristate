@@ -5,6 +5,8 @@ include(INCLUDES . 'course_init.php');
 $pairings = $golf->getPairings($_GET['roundPlayed']);
 $players_row = $golf->displayPairings($_GET['roundPlayed']);
 
+$groupSize = $golf->calculateGroupSize();
+
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
 ?>
@@ -22,7 +24,17 @@ include(MENUS . 'navbar.php');
     <div row="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <input type="text" name="group" class="form-control" id="floatingInput">
+          <select name="playerID" class="form-control">
+            <option value="0" selected>Select one</option>
+<?php
+for ($x = 0; $x < $groupSize; $x++) {
+  $groupLetter = chr(65+$x);
+?>
+            <option value="<?php echo $groupLetter; ?>"><?php echo $groupLetter; ?></option>
+<?php
+}
+?>
+          </select>
           <label for="group">Group</label>
         </div>
       </div>

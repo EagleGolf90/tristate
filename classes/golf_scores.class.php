@@ -127,6 +127,22 @@ class GolfScores {
   public function addPairings() { $ret = $this->sqlTable->execute('addPairings', array($_POST['roundPlayed'], 1, strtoupper($_POST['group']), $_POST['playerID'])); }
   public function deletePairings($roundPlayed, $group) { return $this->sqlTable->execute('deletePairings', array($roundPlayed, $group)); }
 
+  private function countPlayers() {
+    $rows = $this->sqlTable->load('countPlayers', array());
+    $numberOfRows = 0;
+    foreach ($rows as $row) $numberOfRows = $row['Total'];
+    return $numberOfRows;
+  }
+
+  public function calculateGroupSize() {
+    $totalGolfers = $this->countPlayers();
+    $golfersInGroup = 4;
+    $groupSizeRemainder = fmod($totalGolfers, $golfersInGroup);
+    $groupSize = intval($totalGolfers / $golfersInGroup);
+    if ($groupSizeRemainder > 0) $groupSize += 1;
+    return $groupSize;
+  }
+
   private function concatenateZeros($value) {
     $temp_value = '';
     if ($value < 100) $temp_value = '0' . $value;
