@@ -7,25 +7,20 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button"
-            data-bs-toggle="dropdown">Results</a>
+          <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Results</a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/leaderboard.php">Leaderboard</a></li>
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/two_day.php">Two-Day Tournament</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage
-            Info</a>
+          <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Info</a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="https://kdga.org/tristate/admin/addContacts.php">Add Contact</a></li>
             <li><a class="nav-link" href="https://kdga.org/tristate/admin/addParticipant.php">Add Participant</a></li>
-            <li><a class="nav-link"
-                href="https://kdga.org/tristate/scores/which_round.php?page=admin/addPairing.php">Add Pairing</a></li>
-            <li><a class="nav-link"
-                href="https://kdga.org/tristate/scores/which_round.php?page=admin/skins.php">Skins</a></li>
-            <li><a class="nav-link"
-                href="https://kdga.org/tristate/scores/which_round.php?page=admin/groups.php">Groups</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/addPairing.php">Add Pairing</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/groups.php">Groups</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/skins.php">Skins</a></li>
           </ul>
         </li>
       </ul>
