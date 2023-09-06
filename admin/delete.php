@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET['page'])) {
+if (!isset($_GET['page'])) {
   die('Must have page parameter. Please try again.');
 }
 
