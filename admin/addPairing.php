@@ -70,7 +70,7 @@ $count = 0;
 $oldGroupID = '';
 foreach ($players_row as $display) {
   if ($oldGroupID != $display['GroupID']) {
-    $delete_link = 'delete_pairings.php?round=' . $roundPlayed . '&group=' . $display['GroupID'];
+    $delete_link = 'delete.php?round=' . $roundPlayed . '&group=' . $display['GroupID'];
 ?>
         <tr class="pairing_header"><td>Group <?php echo $display['GroupID']; ?></td><td style="text-align: right"><a href="<?php echo $delete_link; ?>">Delete</a></td></tr>
 <?php

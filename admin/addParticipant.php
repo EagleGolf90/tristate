@@ -59,7 +59,7 @@ $tristate = 0;
 $two_day = 0;
 foreach ($players_row as $display) {
   $name_value = $display['LastName'] . ', ' . $display['FirstName'];
-  $delete_link = 'delete_participant.php?id=' . $display['PlayerID'];
+  $delete_link = 'delete.php?id=' . $display['PlayerID'];
 ?>
         <tr>
           <td><?php echo $name_value; ?></td>
