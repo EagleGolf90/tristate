@@ -143,6 +143,30 @@ class GolfScores {
     return $groupSize;
   }
 
+  public function determineStrokes($stroke) {
+    switch (strtolower($stroke)) {
+      case 'ace':
+        $class_name = 'text-warning';
+        break;
+      case 'albatross':
+        $class_name = 'text-success';
+        break;
+      case 'double eagle':
+        $class_name = 'text-success';
+        break;
+      case 'eagle':
+        $class_name = 'text-primary';
+        break;
+      case 'birdie':
+        $class_name = 'text-danger';
+        break;
+      default:
+        $class_name = '';
+        break;
+    }
+    return '<span class="' . $class_name . '">' . $stroke . '</span>';
+  }
+
   private function concatenateZeros($value) {
     $temp_value = '';
     if ($value < 100) $temp_value = '0' . $value;
