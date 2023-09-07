@@ -21,6 +21,7 @@
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/addPairing.php">Add Pairing</a></li>
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/groups.php">Groups</a></li>
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/skins.php">Skins</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/all_scores.php">All Scores</a></li>
           </ul>
         </li>
       </ul>

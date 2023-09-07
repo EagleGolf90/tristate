@@ -39,10 +39,7 @@ foreach ($skins as $skin) {
     <div class="col-md-3">&nbsp;</div>
     <div class="col-md-3"><?php echo $fullName; ?></div>
     <div class="col-md-3">
-      <?php
-      //echo $skin['Stroke'];
-      echo $golf->determineStrokes($skin['Stroke']);
-      ?>
+      <?php echo '<span class="' . $skin['tag_name'] . '">' . $skin['Stroke'] . '</span>'; ?>
     </div>
     <div class="col-md-3">&nbsp;</div>
   </div>

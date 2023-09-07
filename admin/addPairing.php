@@ -25,8 +25,8 @@ include(MENUS . 'navbar.php');
     <div row="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <select name="groupID" class="form-control">
-            <option value="0" selected>Select one</option>
+          <select name="groupID" class="form-control" required>
+            <option value="" selected>Select one</option>
 <?php
 for ($x = 0; $x < $groupSize; $x++) {
   $groupLetter = chr(65+$x);
@@ -44,8 +44,8 @@ for ($x = 0; $x < $groupSize; $x++) {
     <div row="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <select name="playerID" class="form-control">
-            <option value="0" selected>Select one</option>
+          <select name="playerID" class="form-control" required>
+            <option value="" selected>Select one</option>
 <?php
 foreach ($pairings as $pairing) {
 ?>

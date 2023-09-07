@@ -31,7 +31,6 @@ $oldOrganization = '';
 $x = 0;
 $team_cut = 0;
 foreach ($rows as $row) {
-  if ($row['TotalScore'] > 0 && $team_cut == $final_cut) echo '<hr/>' . "\n";
   if ($oldOrganization != $row['Organization']) {
     $team_cut = 0;
     if ($x > 0) {
