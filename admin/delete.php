@@ -13,11 +13,11 @@ $location = ADMIN_URL;
 switch (strtolower($_GET['page'])) {
   case 'participant':
     $golf->deleteParticipant($_GET['id']);
-    $location .= 'addParticipant.php?roundPlayed=' . $_GET['roundPlayed'];
+    $location .= 'addParticipant.php';
     break;
   case 'pairing':
     $golf->deletePairings($_GET['round'], $_GET['group']);
-    $location .= 'addPairing.php?roundPlayed=' . $_GET['roundPlayed'];
+    $location .= 'addPairing.php?roundPlayed=' . $_GET['round'];
     break;
 }
 $golf = null;
