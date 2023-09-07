@@ -50,6 +50,7 @@ foreach ($participants as $participant) {
     <?php include(INCLUDES . 'submit_button.php'); ?>
 
     <hr/>
+
     <div class="row">
       <div class="col-md-12">
         <table class="table table-hover table-bordered">

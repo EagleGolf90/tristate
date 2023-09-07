@@ -29,10 +29,11 @@ include(MENUS . 'navbar.php');
 <?php
 $oldOrganization = '';
 $x = 0;
-$team_cut = 0;
+$team_cut = 1;
 foreach ($rows as $row) {
+  if ($team_cut == $final_cut) echo '<hr/>';
   if ($oldOrganization != $row['Organization']) {
-    $team_cut = 0;
+    $team_cut = 1;
     if ($x > 0) {
 ?>
     </div>
