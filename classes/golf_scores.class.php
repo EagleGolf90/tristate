@@ -143,6 +143,8 @@ class GolfScores {
     return $groupSize;
   }
 
+  public function modifySetup() { return $this->sqlTable->execute('updateSetup', array(BUS_UNIT, $_POST['final_cut'])); }
+
   public function getAllScores($roundPlayed) { return $this->sqlTable->load('loadAllScores', array($roundPlayed)); }
 
   private function concatenateZeros($value) {
