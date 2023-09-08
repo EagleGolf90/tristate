@@ -19,7 +19,7 @@ include(MENUS . 'navbar.php');
     <div row="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <input type="text" name="final_cut" class="form-control" id="floatingInput" value="<?php $golf->getFinalCut(); ?>">
+          <input type="text" name="final_cut" class="form-control" id="floatingInput" value="<?php echo $golf->getFinalCut(); ?>">
           <label for="final_cut">Final Cut</label>
         </div>
       </div>

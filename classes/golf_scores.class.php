@@ -28,6 +28,8 @@ class GolfScores {
     return $this->courseDetails;
   }
 
+  public function loadRoundPlayed() { return $this->sqlTable->load('loadRoundPlayed', array()); }
+
   public function getRoundPlayed() {
     $rs = $this->sqlTable->load('getRoundInfo', array('(select MIN(RoundPlayed) from rounds where DatePlayed >= CURRENT_DATE())'));
     $roundPlayed = 1;
@@ -62,6 +64,9 @@ class GolfScores {
     $this->loadFinalCut();
     return $this->finalCut;
   }
+
+  public function getSkinsParticipants() { return $this->sqlTable->load('loadSkinsParticipants', array()); }
+  public function displaySkinsParticipants() { return $this->sqlTable->load('displaySkinsParticipants', array()); }
 
   public function getParticipants() { return $this->sqlTable->load('loadParticipants', array()); }
   public function displayParticipants() { return $this->sqlTable->load('displayParticipants', array()); }
@@ -104,6 +109,8 @@ class GolfScores {
   }
 
   public function addNames() { $ret = $this->sqlTable->execute('addNames', array($this->generateID(), $_POST['firstName'], $_POST['lastName'], $_POST['org_name'])); }
+  public function addSkins() { $ret = $this->sqlTable->execute('addSkins', array($_POST['roundPlayed'], $_POST['playerID'], ($_POST['paid'] == 1 ? 'Y' : 'N'), 5.00)); }
+  public function deleteSkinsParticipants($roundPlayed, $playerID) { $this->sqlTable->execute('deleteSkinsParticipants', array($roundPlayed, $playerID)); }
 
   private function addParticipantsRound($roundID) {
     $rows = $this->sqlTable->load('selectRoundPlayed', array($roundID));

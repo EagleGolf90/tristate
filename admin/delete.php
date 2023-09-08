@@ -7,7 +7,6 @@ include('../preload.php');
 
 include(CLASSES . 'golf_scores.class.php');
 $golf = new GolfScores();
-$golf->deletePairings($_GET['round'], $_GET['group']);
 
 $location = ADMIN_URL;
 switch (strtolower($_GET['page'])) {
@@ -18,6 +17,10 @@ switch (strtolower($_GET['page'])) {
   case 'pairing':
     $golf->deletePairings($_GET['round'], $_GET['group']);
     $location .= 'addPairing.php?roundPlayed=' . $_GET['round'];
+    break;
+  case 'skins':
+    $golf->deleteSkinsParticipants($_GET['round'], $_GET['id']);
+    $location .= 'manageSkins.php';
     break;
 }
 $golf = null;

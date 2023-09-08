@@ -10,6 +10,10 @@ $golf = new GolfScores();
 
 $location = ADMIN_URL;
 switch (strtolower($_POST['page'])) {
+  case 'skins':
+    $golf->addSkins();
+    $location .= 'manageSkins.php';
+    break;
   case 'contact':
     $golf->addNames();
     $location .= 'addContacts.php';

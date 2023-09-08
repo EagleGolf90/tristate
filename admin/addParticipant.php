@@ -19,8 +19,8 @@ include(MENUS . 'navbar.php');
     <div row="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <select name="playerID" class="form-control">
-            <option value="0" selected>Select one</option>
+          <select name="playerID" class="form-control" required>
+            <option value="" selected>Select one</option>
 <?php
 foreach ($participants as $participant) {
   $name_value = $participant['LastName'] . ', ' . $participant['FirstName'] . ' (' . $participant['Organization'] . ')';
@@ -36,9 +36,9 @@ foreach ($participants as $participant) {
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3" required>
           <select name="player_choice" class="form-control">
-            <option value="0" selected>Select one</option>
+            <option value="" selected>Select one</option>
             <option value="1">Tri-State Cup</option>
             <option value="2">IDGA Two Day Tournament</option>
           </select>

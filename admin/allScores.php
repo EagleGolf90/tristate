@@ -60,13 +60,10 @@ foreach ($rows as $row) {
     <tr>
       <td class="scores"><?php echo $row['LastName'] . ', ' . $row['FirstName']; ?></td>
 <?php
-  $front9 = 0;
-  $back9 = 0;
+  $front9 = $row['Front9'];
+  $back9 = $row['Back9'];
   for ($x = 1; $x <= 18; $x++) {
     $fieldName = 'Score' . strval($x);
-    if ($x <= 9) $front9 += $row[$fieldName];
-    if ($x > 9) $back9 += $row[$fieldName];
-    $total += $row[$fieldName];
     if ($x == 10) echo '<td class="scores">' . $front9 . '</td>' . "\n";
 ?>
       <td class="scores"><?php echo $row[$fieldName]; ?></td>
