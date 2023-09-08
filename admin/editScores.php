@@ -8,15 +8,19 @@ include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
 ?>
 
-<form class="regForm" action="add.php" method="post">
+<form class="regForm" action="update_scores.php" method="post">
 <div class="container-fluid">
-  <input type="text" name="page" value="scores" hidden>
   <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
   <input type="text" name="roundPlayed" value="<?php echo $roundPlayed; ?>" hidden>
   <input type="text" name="roundID" value="<?php echo $roundID; ?>" hidden>
 <?php for ($y = 0; $y < sizeof($players); $y++) { ?>
   <input type="text" name="player[]" value="<?php echo $players[$y][2]; ?>" hidden>
 <?php } ?>
+  <div class="row header_link">
+    <div class="col-sm-12 text-center">
+      <a href="https://kdga.org/tristate/">Return to Groups</a>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-sm-12 text-center">

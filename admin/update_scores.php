@@ -7,7 +7,7 @@ $location = ADMIN_URL . 'groups.php?roundPlayed=' . $_POST['roundPlayed']; ?>
 <?php
 include(CLASSES . 'golf_scores.class.php');
 $golf = new GolfScores();
-$golf->addScores();
+$golf->updateScores();
 $golf = null;
 
 $location = ADMIN_URL . 'groups.php?roundPlayed=' . $_POST['roundPlayed'];

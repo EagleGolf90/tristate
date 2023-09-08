@@ -10,6 +10,10 @@ $golf = new GolfScores();
 
 $location = ADMIN_URL;
 switch (strtolower($_POST['page'])) {
+  case 'scores':
+    $golf->addScores();
+    $location .= 'groups.php?roundPlayed=' . $_POST['roundPlayed'];
+    break;
   case 'skins':
     $golf->addSkins();
     $location .= 'manageSkins.php';
