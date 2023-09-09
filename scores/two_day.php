@@ -3,7 +3,6 @@ include('../preload.php');
 include(INCLUDES . 'initialize_golf.php');
 include(INCLUDES . 'course_init.php');
 $rows = $golf->getTwoDayLeaderboard();
-$finalCut = $golf->getFinalCut();
 
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');

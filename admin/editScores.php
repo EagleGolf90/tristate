@@ -1,7 +1,7 @@
 <?php
 include('../preload.php');
-include(INCLUDES . 'initialize_golf.php');
-include(INCLUDES . 'course_init.php');
+include(CLASSES . 'edit_scores.class.php');
+$golf = new EditScores();
 $players = $golf->getGroups($roundPlayed, $_GET['group']);
 
 include(HTML . 'beginHTML.php');
@@ -16,22 +16,11 @@ include(MENUS . 'navbar.php');
 <?php for ($y = 0; $y < sizeof($players); $y++) { ?>
   <input type="text" name="player[]" value="<?php echo $players[$y][2]; ?>" hidden>
 <?php } ?>
-  <div class="row header_link">
-    <div class="col-sm-12 text-center">
-      <a href="https://kdga.org/tristate/">Return to Groups</a>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-sm-12 text-center">
-      <h3><?php echo $courseInfo[0][1]; ?></h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 text-center">
-      <h4><?php echo $date_played; ?></h4>
-    </div>
-  </div>
+  <?php
+  $display_message = '<h2>Edit Scores</h2>';
+  include(INCLUDES . 'display_message.php');
+  ?>
 
 <?php for ($z = 0; $z < sizeof($players); $z++) {
         $player_id = '';

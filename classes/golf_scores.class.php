@@ -13,6 +13,16 @@ class GolfScores {
     $this->sqlTable = new SQLTable();
     $this->courseInfo = array();
     $this->courseDetails = array();
+    $this->loadFinalCut();
+  }
+
+  public function isTeamFinalCut($team_cut) { return ($team_cut == $this->finalCut); }
+  public function isSecondRowOrMore($x) { return ($x > 0); }
+  public function separator() { return '<hr/>'; }
+
+  public function printGolferName($row) {
+    echo $row['LastName'] . ', ' . $row['FirstName'] . ($row['TotalScore'] == '' ? '' : ' (' . $row['TotalScore'] . ')');
+    echo '<br/>' . "\n";
   }
 
   public function getCourseInfo($roundPlayed)
@@ -60,10 +70,10 @@ class GolfScores {
     return $this->players;
   }
 
-  public function getFinalCut() {
-    $this->loadFinalCut();
-    return $this->finalCut;
-  }
+  // public function getFinalCut() {
+  //   $this->loadFinalCut();
+  //   return $this->finalCut;
+  // }
 
   public function getSkinsParticipants() { return $this->sqlTable->load('loadSkinsParticipants', array()); }
   public function displaySkinsParticipants() { return $this->sqlTable->load('displaySkinsParticipants', array()); }
