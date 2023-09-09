@@ -20,7 +20,7 @@ include(MENUS . 'navbar.php');
 
   <div class="row">
     <div class="col-md-4">&nbsp;</div>
-    <div class="col-md-2">Which Date?</div>
+    <div class="col-md-2">Date Played</div>
     <div class="col-md-2">
       <select name="roundPlayed" class="form-select">
       <?php

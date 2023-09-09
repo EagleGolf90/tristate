@@ -16,8 +16,8 @@ include(MENUS . 'navbar.php');
 
   <div class="row">
     <table class="table table-dark table-striped table-hover">
-    <tr>
-      <td class="text-center">Name</td>
+    <tr class="table-primary">
+      <td class="text-center">Hole</td>
 <?php for ($x = 1; $x <= 18; $x++) {
         if ($x == 10) echo '<td class="text-center">OUT</td>' . "\n";
 ?>
@@ -27,7 +27,7 @@ include(MENUS . 'navbar.php');
       <td class="text-center">TOT</td>
     </tr>
 
-    <tr>
+    <tr class="table-success">
       <td class="text-center">Par</td>
 <?php $front9 = 0;
       $back9 = 0;
@@ -43,7 +43,7 @@ include(MENUS . 'navbar.php');
       <td class="text-center"><?php echo ($front9 + $back9); ?></td>
     </tr>
 
-    <tr>
+    <tr class="table-secondary">
       <td class="text-center">HCP</td>
 <?php for ($x = 0; $x < 18; $x++) {
         if ($x == 9) echo '<td class="text-center">&nbsp;</td>' . "\n";

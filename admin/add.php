@@ -9,6 +9,7 @@ include(CLASSES . 'golf_scores.class.php');
 $golf = new GolfScores();
 
 $location = ADMIN_URL;
+echo $location . '<br/>';
 switch (strtolower($_POST['page'])) {
   case 'scores':
     $golf->addScores();
