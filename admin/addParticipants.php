@@ -9,7 +9,7 @@ include(MENUS . 'navbar.php');
 ?>
 
 <form class="regForm" action="add.php" method="post">
-  <input type="text" name="page" value="participant" hidden>
+  <input type="text" name="page" value="participants" hidden>
   <div class="container-list">
     <?php
     $display_message = '<h3>Add Participant</h3>';

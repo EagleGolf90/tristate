@@ -1,39 +1,20 @@
 <?php
-if (!isset($_POST['page'])) {
-  die('Must have page parameter. Please try again.');
-}
+if (!isset($_POST['page'])) die('Must have page parameter. Please try again.');
 
 include('../preload.php');
 
 include(CLASSES . 'golf_scores.class.php');
-$golf = new GolfScores();
+$object = new GolfScores();
+$methodName = 'add' . ucwords($_POST['page']);
 
-$location = ADMIN_URL;
-switch (strtolower($_POST['page'])) {
-  case 'scores':
-    $golf->addScores();
-    $location .= 'groups.php?roundPlayed=' . $_POST['roundPlayed'];
-    break;
-  case 'skins':
-    $golf->addSkins();
-    $location .= 'manageSkins.php';
-    break;
-  case 'contact':
-    $golf->addNames();
-    $location .= 'addContacts.php';
-    break;
-  case 'participant':
-    $golf->addParticipants();
-    $location .= 'addParticipant.php?roundPlayed=' . $_POST['roundPlayed'];
-    break;
-  case 'pairing':
-    $golf->addPairings();
-    $location .= 'addPairing.php?roundPlayed=' . $_POST['roundPlayed'];
-    break;
+if (!method_exists($object, $methodName)) {
+  die('Something isn\'t working. Please check with Administrator.');
 }
-$golf = null;
+$object->$methodName();
 
-echo $location . '<br/>';
+$location = ADMIN_URL . $object->getRedirectLink(strtolower($_POST['page']));
 header("Location: " . $location);
 exit;
+
+$object = null;
 ?>

@@ -8,8 +8,9 @@ include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
 ?>
 
-<form class="regForm" action="update_scores.php" method="post">
+<form class="regForm" action="add.php" method="post">
 <div class="container-fluid">
+  <input type="text" name="page" value="scores" hidden>
   <input type="text" name="NumberOfPlayers" value="<?php echo sizeof($players); ?>" hidden>
   <input type="text" name="roundPlayed" value="<?php echo $roundPlayed; ?>" hidden>
   <input type="text" name="roundID" value="<?php echo $roundID; ?>" hidden>

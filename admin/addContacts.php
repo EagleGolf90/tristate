@@ -8,7 +8,7 @@ include(MENUS . 'navbar.php');
 ?>
 
 <form class="regForm" action="add.php" method="post">
-<input type="text" name="page" value="contact" hidden>
+<input type="text" name="page" value="contacts" hidden>
   <div class="container-form">
     <?php
     $display_message = '<h3>Add Contact</h3>';

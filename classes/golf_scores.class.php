@@ -53,7 +53,17 @@ class GolfScores {
     return $this->roundID;
   }
 
-  public function getTeamScores() { return $this->sqlTable->load('loadTeams', array()); }
+  public function getTeamScores() {
+    $team_scores = array();
+    $teams_row = $this->sqlTable->load('loadOrganizations', array());
+    foreach ($teams_row as $team_row) {
+      $teams = $this->sqlTable->load('loadTeamsScores', array($team_row['FieldValue']));
+      $teams_total = 0;
+      foreach ($teams as $team) $teams_total += $team['TotalScore'];
+      $team_scores[] = array($team_row['FieldValue'], $team_row['LongName'], $teams_total);
+    }
+    return $team_scores;
+  }
 
   public function getPlayers($roundPlayed)
   {
@@ -69,11 +79,6 @@ class GolfScores {
     $this->loadListOfPlayers('loadPlayersGroup', array($roundPlayed, $group));
     return $this->players;
   }
-
-  // public function getFinalCut() {
-  //   $this->loadFinalCut();
-  //   return $this->finalCut;
-  // }
 
   public function getSkinsParticipants() { return $this->sqlTable->load('loadSkinsParticipants', array()); }
   public function displaySkinsParticipants() { return $this->sqlTable->load('displaySkinsParticipants', array()); }
@@ -118,7 +123,7 @@ class GolfScores {
     }
   }
 
-  public function addNames() { $ret = $this->sqlTable->execute('addNames', array($this->generateID(), $_POST['firstName'], $_POST['lastName'], $_POST['org_name'])); }
+  public function addContacts() { $ret = $this->sqlTable->execute('addNames', array($this->generateID(), $_POST['firstName'], $_POST['lastName'], $_POST['org_name'])); }
   public function addSkins() { $ret = $this->sqlTable->execute('addSkins', array($_POST['roundPlayed'], $_POST['playerID'], ($_POST['paid'] == 1 ? 'Y' : 'N'), 5.00)); }
   public function deleteSkinsParticipants($roundPlayed, $playerID) { $this->sqlTable->execute('deleteSkinsParticipants', array($roundPlayed, $playerID)); }
 
@@ -127,6 +132,14 @@ class GolfScores {
     $roundPlayed = 1;
     foreach ($rows as $row) $roundPlayed = $row['RoundPlayed'];
     $ret = $this->sqlTable->execute('addParticipants', array($roundPlayed, $_POST['playerID']));
+  }
+
+  public function getRedirectLink($name, $roundPlayed) {
+    $rs = $this->sqlTable->load('loadRedirectLink', array($name));
+    $link = '';
+    foreach ($rs as $r) $link = $r['url_link'];
+    $link = str_replace($roundPlayed, ':a1', $link);
+    return $link;
   }
 
   public function addParticipants()

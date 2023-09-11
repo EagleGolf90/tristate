@@ -16,9 +16,9 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Players</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/tristate/admin/addContacts.php">Add Contact</a></li>
-            <li><a class="nav-link" href="https://kdga.org/tristate/admin/addParticipant.php">Add Participant</a></li>
-            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/addPairing.php">Add Pairing</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/addContacts.php">Add Contacts</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/addParticipants.php">Add Participants</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/addPairings.php">Add Pairings</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
