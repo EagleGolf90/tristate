@@ -14,6 +14,6 @@ switch (strtolower($_POST['page'])) {
 }
 $golf = null;
 
-// header("Location: " . $location);
-// exit;
+header("Location: " . $location);
+exit;
 ?>

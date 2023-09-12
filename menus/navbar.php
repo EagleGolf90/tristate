@@ -9,8 +9,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Results</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/tristate/scores/leaderboard.php">Leaderboard</a></li>
-            <li><a class="nav-link" href="https://kdga.org/tristate/scores/two_day.php">Two-Day Tournament</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/leaderboard.php?role=admin">Leaderboard</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/two_day.php?role=admin">Two-Day Tournament</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -29,9 +29,9 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Add Skins Participant</a>
+          <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Skins</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/tristate/admin/manageSkins.php">Manage Skins</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/manageSkins.php">Skins Participants</a></li>
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/skins.php">Display Skins</a></li>
           </ul>
         </li>

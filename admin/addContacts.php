@@ -8,7 +8,7 @@ include(MENUS . 'navbar.php');
 ?>
 
 <form class="regForm" action="add.php" method="post">
-<input type="text" name="page" value="contacts" hidden>
+  <input type="text" name="page" value="contacts" hidden>
   <div class="container-form">
     <?php
     $display_message = '<h3>Add Contact</h3>';
@@ -46,10 +46,12 @@ include(MENUS . 'navbar.php');
 <?php
 $count = 0;
 foreach ($contacts_row as $contact) {
+  $delete_link = 'delete.php?page=contacts&id=' . $contact['PlayerID'];
 ?>
         <tr>
           <td><?php echo $contact['LastName'] . ', ' . $contact['FirstName']; ?></td>
           <td><?php echo $contact['Organization']; ?></td>
+          <td><a href="<?php echo $delete_link; ?>">Delete</a></td>
         </tr>
 <?php
   $count += 1;

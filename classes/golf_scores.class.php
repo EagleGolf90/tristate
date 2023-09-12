@@ -57,8 +57,8 @@ class GolfScores {
     $team_scores = array();
     $teams_row = $this->sqlTable->load('loadOrganizations', array());
     foreach ($teams_row as $team_row) {
-      $teams = $this->sqlTable->load('loadTeamsScores', array($team_row['FieldValue']));
       $teams_total = 0;
+      $teams = $this->sqlTable->load('loadTeamsScores', array($team_row['FieldValue']));
       foreach ($teams as $team) $teams_total += $team['TotalScore'];
       $team_scores[] = array($team_row['FieldValue'], $team_row['LongName'], $teams_total);
     }
@@ -124,8 +124,10 @@ class GolfScores {
   }
 
   public function addContacts() { $ret = $this->sqlTable->execute('addNames', array($this->generateID(), $_POST['firstName'], $_POST['lastName'], $_POST['org_name'])); }
+  public function deleteContacts($playerID) { $this->sqlTable->execute('deleteContacts', array($playerID)); }
+
   public function addSkins() { $ret = $this->sqlTable->execute('addSkins', array($_POST['roundPlayed'], $_POST['playerID'], ($_POST['paid'] == 1 ? 'Y' : 'N'), 5.00)); }
-  public function deleteSkinsParticipants($roundPlayed, $playerID) { $this->sqlTable->execute('deleteSkinsParticipants', array($roundPlayed, $playerID)); }
+  public function deleteSkins($roundPlayed, $playerID) { $this->sqlTable->execute('deleteSkinsParticipants', array($roundPlayed, $playerID)); }
 
   private function addParticipantsRound($roundID) {
     $rows = $this->sqlTable->load('selectRoundPlayed', array($roundID));
@@ -137,8 +139,12 @@ class GolfScores {
   public function getRedirectLink($name, $roundPlayed) {
     $rs = $this->sqlTable->load('loadRedirectLink', array($name));
     $link = '';
-    foreach ($rs as $r) $link = $r['url_link'];
-    $link = str_replace($roundPlayed, ':a1', $link);
+    $round_played = 'N';
+    foreach ($rs as $r) {
+      $link = $r['url_link'];
+      $round_played = $r['round_played'];
+    }
+    if ($round_played == 'Y') $link .= '?roundPlayed=' . $roundPlayed;
     return $link;
   }
 
@@ -149,7 +155,7 @@ class GolfScores {
     $ret = $this->sqlTable->execute('addPlayersChoice', array($_POST['playerID'], $_POST['player_choice']));
   }
 
-  public function deleteParticipant($playerID) {
+  public function deleteParticipants($playerID) {
     $this->sqlTable->execute('deleteParticipant', array($playerID));
     $this->sqlTable->execute('deletePlayersChoice', array($playerID));
   }

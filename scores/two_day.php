@@ -1,11 +1,18 @@
 <?php
+if (!isset($_GET['role'])) die('Must have role parameter. Please try again.');
+$role = strtolower($_GET['role']);
+
 include('../preload.php');
 include(INCLUDES . 'initialize_golf.php');
 include(INCLUDES . 'course_init.php');
 $rows = $golf->getTwoDayLeaderboard();
 
 include(HTML . 'beginHTML.php');
-include(MENUS . 'navbar.php');
+if ($role == 'admin') include(MENUS . 'navbar.php');
+if ($role == 'user') {
+  $url_link = MENUS_URL . '?role=' . $role;
+  include(MENUS . 'return_menu.php');
+}
 ?>
 
 <div class="container">
