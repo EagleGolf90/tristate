@@ -25,6 +25,7 @@
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Scores</a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/groups.php">Enter Scores</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/editScores.php">Edit Scores</a></li>
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/allScores.php">All Scores</a></li>
           </ul>
         </li>

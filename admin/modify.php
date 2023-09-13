@@ -1,15 +1,18 @@
 <?php
-if (!isset($_POST['page'])) die('Must have page parameter. Please try again.');
+if (!isset($_GET['page'])) die('Must have page parameter. Please try again.');
 
 include('../preload.php');
 include(INCLUDES . 'initialize_golf.php');
 
 $location = ADMIN_URL;
-switch (strtolower($_POST['page'])) {
+switch (strtolower($_GET['page'])) {
   case 'modifysetup':
-    echo BUS_UNIT . '<br/>';
     $golf->modifySetup();
     $location .= 'manageSetup.php';
+    break;
+  case 'modifyscores':
+    $golf->updateScores($_GET['id'], $_GET['roundPlayed'], $_GET['hole'], $_GET['score']);
+    $location .= 'editScores.php?roundPlayed=' . $_GET['roundPlayed'];
     break;
 }
 $golf = null;
