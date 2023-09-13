@@ -31,14 +31,14 @@ if ($role == 'user') {
   ?>
 
   <div class="row">
-    <div class="col-md-2">&nbsp;</div>
-    <div class="col header">Place</div>
-    <div class="col-md-3 header">Name</div>
-    <div class="col text-center header">Rnd 1</div>
-    <div class="col text-center header">Rnd 2</div>
-    <div class="col text-center header">Total</div>
-    <div class="col-md-3">&nbsp;</div>
-  </div>
+    <table class="table table-bordered table-hover table-striped">
+    <tr>
+      <td class="col text-center header">Place</td>
+      <td class="col-md-3 text-center header">Name</td>
+      <td class="col text-center header">Rnd 1</td>
+      <td class="col text-center header">Rnd 2</td>
+      <td class="col text-center header">Total</td>
+    </tr>
 
 <?php
 $place = 0;
@@ -52,19 +52,19 @@ foreach ($rows as $row) {
     $tied += 1;
   }
 ?>
-  <div class="row">
-    <div class="col-md-2">&nbsp;</div>
-    <div class="col text-center"><?php echo $place; ?></div>
-    <div class="col-md-3"><?php echo $row['LastName'] . ', ' . $row['FirstName']; ?></div>
-    <div class="col text-center"><?php echo $row['R1']; ?></div>
-    <div class="col text-center"><?php echo $row['R2']; ?></div>
-    <div class="col text-center"><?php echo $row['TotalScore']; ?></div>
-    <div class="col-md-3">&nbsp;</div>
-  </div>
+    <tr>
+      <td class="col text-center"><?php echo $place; ?></td>
+      <td class="col-md-3"><?php echo $row['LastName'] . ', ' . $row['FirstName']; ?></td>
+      <td class="col text-center"><?php echo $row['R1']; ?></td>
+      <td class="col text-center"><?php echo $row['R2']; ?></td>
+      <td class="col text-center"><?php echo $row['TotalScore']; ?></td>
+    </tr>
 <?php
   $oldScore = $row['TotalScore'];
 }
 ?>
+    </table>
+  </div>
 </div>
 
 <?php include(HTML . 'endHTML.php'); ?>

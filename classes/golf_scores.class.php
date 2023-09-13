@@ -21,8 +21,7 @@ class GolfScores {
   public function separator() { return '<hr/>'; }
 
   public function printGolferName($row) {
-    echo $row['LastName'] . ', ' . $row['FirstName'] . ($row['TotalScore'] == '' ? '' : ' (' . $row['TotalScore'] . ')');
-    echo '<br/>' . "\n";
+    echo '<tr><td>' . $row['LastName'] . ', ' . $row['FirstName'] . '</td><td>' . ($row['TotalScore'] == '' ? '&nbsp;' : $row['TotalScore']) . '</td></tr>';
   }
 
   public function getCourseInfo($roundPlayed)

@@ -9,7 +9,7 @@
   th.scores, td.scores, input.holes { text-align: center; }
   .name_label { font-size: 18px; }
   .container-fluid { width: 100%; }
-  .header { font-weight: bold; font-style: italic; text-decoration-line: underline; }
+  .header { font-weight: bold; font-style: italic; }
   .header_link, #myHeader { font-size: 20px; text-align: center; }
   .container-form { width: 500px; margin-left: 35%; }
   .container-list { width: 700px; margin-left: 25%; }
