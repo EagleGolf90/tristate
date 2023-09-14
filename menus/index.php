@@ -16,8 +16,7 @@ foreach ($rows As $row) {
   $url_menu = TRISTATE_URL . $row['URL'] . '?role=' . $role;
 ?>
   <div class="row">
-    <div class="col-3">&nbsp;</div>
-    <div class="col-6">
+    <div class="col-12">
       <a class="links" href="<?php echo $url_menu; ?>">
         <div class="card <?php echo $row['TagName']; ?> text-white mb-1 full">
           <div class="card-body">
@@ -26,7 +25,6 @@ foreach ($rows As $row) {
         </div>
       </a>
     </div>
-    <div class="col-3">&nbsp;</div>
   </div>
 <?php
 }

@@ -5,3 +5,6 @@ includes/config.php
 scores/backup/*
 html/backup/*
 testing/*
+menus/backup/*
+html/menu.html
+html/css/css-styles.css

@@ -41,10 +41,10 @@ foreach ($rows as $row) {
       <table class="table table-bordered table-hover table-striped">
       <tr><td colspan="2"><h2><?php echo $row['Organization'] . (empty($team_score) ? '' : ' (' . $team_score . ')'); ?></h2></td></tr>
 <?php
+    $x++;
   }
   echo $golf->printGolferName($row);
   $oldOrganization = $row['Organization'];
-  $x++;
   $team_cut++;
 }
 ?>
