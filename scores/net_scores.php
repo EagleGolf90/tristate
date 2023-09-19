@@ -53,7 +53,6 @@ foreach ($rows as $row) {
   } else {
     $tied += 1;
   }
-  if ($place > 1) {
 ?>
     <tr>
       <td class="col text-center"><?php echo $place; ?></td>
@@ -66,7 +65,6 @@ foreach ($rows as $row) {
     </tr>
 <?php
     $oldScore = $row['TotalScore'];
-  }
 }
 ?>
     </table>

@@ -11,6 +11,7 @@
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/leaderboard.php?role=admin">Leaderboard</a></li>
             <li><a class="nav-link" href="https://kdga.org/tristate/scores/two_day.php?role=admin">Two-Day Tournament</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/net_scores.php?role=admin">Two-Day Tournament (Net Scores)</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
