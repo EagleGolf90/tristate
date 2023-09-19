@@ -26,7 +26,7 @@ if ($role == 'user') {
   <hr/>
 
   <?php
-  $display_message = '<h2>IDGA Two-Day Leaderboard<h2>';
+  $display_message = '<h2>IDGA Two-Day Leaderboard - Net Score<h2>';
   include(INCLUDES . 'display_message.php');
   ?>
 
