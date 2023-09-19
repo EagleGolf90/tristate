@@ -5,7 +5,7 @@ $role = strtolower($_GET['role']);
 include('../preload.php');
 include(INCLUDES . 'initialize_golf.php');
 include(INCLUDES . 'course_init.php');
-$rows = $golf->getTwoDayLeaderboard();
+$rows = $golf->loadNetScoreLeaderboard();
 
 include(HTML . 'beginHTML.php');
 if ($role == 'admin') include(MENUS . 'navbar.php');
@@ -38,6 +38,8 @@ if ($role == 'user') {
       <td class="col text-center header">Rnd 1</td>
       <td class="col text-center header">Rnd 2</td>
       <td class="col text-center header">Total</td>
+      <td class="col text-center header">HCP</td>
+      <td class="col text-center header">Net</td>
     </tr>
 
 <?php
@@ -51,6 +53,7 @@ foreach ($rows as $row) {
   } else {
     $tied += 1;
   }
+  if ($place > 1) {
 ?>
     <tr>
       <td class="col text-center"><?php echo $place; ?></td>
@@ -58,9 +61,12 @@ foreach ($rows as $row) {
       <td class="col text-center"><?php echo $row['R1']; ?></td>
       <td class="col text-center"><?php echo $row['R2']; ?></td>
       <td class="col text-center"><?php echo $row['TotalScore']; ?></td>
+      <td class="col text-center"><?php echo $row['handicap']; ?></td>
+      <td class="col text-center"><?php echo $row['NetScore']; ?></td>
     </tr>
 <?php
-  $oldScore = $row['TotalScore'];
+    $oldScore = $row['TotalScore'];
+  }
 }
 ?>
     </table>

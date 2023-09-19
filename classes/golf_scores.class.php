@@ -93,6 +93,7 @@ class GolfScores {
   public function getRounds() { return $this->sqlTable->load('loadRounds', array()); }
   public function getLeaderboard() { return $this->sqlTable->load('loadLeaderboard', array()); }
   public function getTwoDayLeaderboard() { return $this->sqlTable->load('loadTwoDayLeaderboard', array()); }
+  public function loadNetScoreLeaderboard() { return $this->sqlTable->load('loadNetScoreLeaderboard', array()); }
   public function checkSkins($roundPlayed) { return $this->sqlTable->load('checkSkins', array($roundPlayed)); }
 
   public function addScores() {
