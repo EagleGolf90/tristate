@@ -14,6 +14,7 @@ class GolfScores {
     $this->courseInfo = array();
     $this->courseDetails = array();
     $this->loadFinalCut();
+    $this->load();
   }
 
   public function isTeamFinalCut($team_cut) { return ($team_cut == $this->finalCut); }
@@ -96,6 +97,11 @@ class GolfScores {
   public function loadNetScoreLeaderboard() { return $this->sqlTable->load('loadNetScoreLeaderboard', array()); }
   public function checkSkins($roundPlayed) { return $this->sqlTable->load('checkSkins', array($roundPlayed)); }
 
+  public function getChampions() { return $this->sqlTable->load('loadChampions', array()); }
+  public function displayChampions() { return $this->sqlTable->load('displayChampions', array()); }
+
+  public function getCourses() { return $this->sqlTable->load('loadCourses', array()); }
+
   public function addScores() {
     $players = $_POST['player'];
     $round_played = $_POST['roundPlayed'];
@@ -128,6 +134,12 @@ class GolfScores {
 
   public function addSkins() { $ret = $this->sqlTable->execute('addSkins', array($_POST['roundPlayed'], $_POST['playerID'], ($_POST['paid'] == 1 ? 'Y' : 'N'), 5.00)); }
   public function deleteSkins($roundPlayed, $playerID) { $this->sqlTable->execute('deleteSkinsParticipants', array($roundPlayed, $playerID)); }
+
+  private function load() {
+    $this->roundPlayed = 0;
+    $rows = $this->sqlTable->load('loadRoundPlayed', array());
+    foreach ($rows as $row) $this->roundPlayed = $row['RoundPlayed'];
+  }
 
   private function addParticipantsRound($roundID) {
     $rows = $this->sqlTable->load('selectRoundPlayed', array($roundID));
