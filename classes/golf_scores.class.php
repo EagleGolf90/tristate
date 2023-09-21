@@ -16,6 +16,7 @@ class GolfScores {
     $this->loadFinalCut();
   }
 
+  public function getRoundID() { return $this->roundID; }
   public function isTeamFinalCut($team_cut) { return ($team_cut == $this->finalCut); }
   public function isSecondRowOrMore($x) { return ($x > 0); }
   public function separator() { return '<hr/>'; }
@@ -39,17 +40,20 @@ class GolfScores {
 
   public function loadRoundPlayed() { return $this->sqlTable->load('loadRoundPlayed', array()); }
 
-  public function getRoundPlayed() {
-    $rs = $this->sqlTable->load('getRoundInfo', array('(select MIN(RoundPlayed) from rounds where DatePlayed >= CURRENT_DATE())'));
-    $roundPlayed = 1;
-    foreach ($rs as $r) $roundPlayed = $r['RoundPlayed'];
+  public function getRoundPlayed($round) {
+    if ($round == 0) {
+      $parm = array('(select RoundPlayed from golfsetup)');
+    } else {
+      $parm = array($round);
+    }
+    $rs = $this->sqlTable->load('getRoundInfo', $parm);
+    $roundPlayed = 0;
+    foreach ($rs as $r) {
+      $roundPlayed = $r['RoundPlayed'];
+      $this->courseID = $r['CourseID'];
+      $this->roundID = $r['RoundID'];
+    }
     return $roundPlayed;
-  }
-
-  public function getRoundID($roundPlayed) {
-    $this->roundPlayed = $roundPlayed;
-    $this->loadRoundID();
-    return $this->roundID;
   }
 
   public function getTeamScores() {

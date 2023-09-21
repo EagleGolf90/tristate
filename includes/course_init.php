@@ -1,15 +1,16 @@
 <?php
 if (PAGE_NAME != 'which_page.php') {
+  $roundPlayed = 0;
   if (PAGE_NAME == 'enterScores.php') {
     $roundPlayed = $_GET['round'];
   } else {
     if (PAGE_NAME != 'two_day.php' && PAGE_NAME != 'leaderboard.php' && PAGE_NAME != 'net_scores.php') {
       $roundPlayed = $_GET['roundPlayed'];
-    } else {
-      $roundPlayed = $golf->getRoundPlayed();
     }
   }
-  $roundID = $golf->getRoundID($roundPlayed);
+  $roundPlayed = $golf->getRoundPlayed($roundPlayed);
+  $roundID = $golf->getRoundID();
+  echo 'Round Played: ' . $roundPlayed . '<br/>';
 
   $courseInfo = $golf->getCourseInfo($roundPlayed);
   $holes = $golf->getCourseDetails();
