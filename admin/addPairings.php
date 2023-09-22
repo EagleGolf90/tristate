@@ -18,7 +18,7 @@ include(MENUS . 'navbar.php');
 
   <div class="container-form">
     <?php
-    $display_message = '<h3>Add Pairing</h3>';
+    $display_message = '<h3>Add Pairing<br/>' . $date_played . '</h3>';
     include(INCLUDES . 'display_message.php');
     ?>
 
