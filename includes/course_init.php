@@ -10,7 +10,6 @@ if (PAGE_NAME != 'which_page.php') {
   }
   $roundPlayed = $golf->getRoundPlayed($roundPlayed);
   $roundID = $golf->getRoundID();
-  echo 'Round Played: ' . $roundPlayed . '<br/>';
 
   $courseInfo = $golf->getCourseInfo($roundPlayed);
   $holes = $golf->getCourseDetails();
