@@ -31,6 +31,14 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Handicaps</a>
+          <ul class="dropdown-menu">
+            <li><a class="nav-link" href="https://kdga.org/kdga/admin/enterHandicaps.php">Enter Handicaps</a></li>
+            <li><a class="nav-link" href="https://kdga.org/kdga/admin/editHandicaps.php">Edit Handicaps</a></li>
+            <li><a class="nav-link" href="https://kdga.org/kdga/admin/allHandicaps.php">All Handicaps</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Skins</a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="https://kdga.org/kdga/admin/manageSkins.php">Skins Participants</a></li>

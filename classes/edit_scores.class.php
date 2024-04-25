@@ -24,5 +24,9 @@ class EditScores {
     $parm = array($_POST['playerID'], $_POST['roundPlayed'], $_POST['holeNumber'], $_POST['scores']);
     $ret = $this->sqlTable->execute('updatePlayersScore', $parm);
   }
+
+  public function loadOrganization() {
+    return $this->sqlTable->load('loadOrganizations', array());
+  }
 }
 ?>

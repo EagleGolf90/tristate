@@ -14,6 +14,7 @@ $sqlTable = new SQLTable();
 $rows = $sqlTable->load('loadMenus', array());
 foreach ($rows As $row) {
   $url_menu = TRISTATE_URL . $row['URL'] . '?role=' . $role;
+  if ($row['Admin'] == 'N') {
 ?>
   <div class="row">
     <div class="col-12">
@@ -27,6 +28,7 @@ foreach ($rows As $row) {
     </div>
   </div>
 <?php
+  }
 }
 ?>
 </div>

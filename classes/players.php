@@ -4,10 +4,12 @@ class Players {
   private $firstName;
   private $lastName;
   private $scores;
+  private $date_of_birth;
+  private $handicap;
 
   public function __construct() { $this->scores = array(); }
 
-  public function getPlayerID() { return $this->_playerID; }
+  public function getPlayerID() { return $this->playerID; }
 
   public function getFirstName() { return $this->firstName; }
   public function setFirstName($firstName) {
@@ -20,6 +22,12 @@ class Players {
     $this->firstName = $firstName;
     $this->lastName = $lastName;
   }
+
+  public function getHandicap() { return $this->handicap; }
+  public function setHandicap($handicap) { $this->handicap = $handicap; }
+
+  public function getDateOfBirth() { return $this->date_of_birth; }
+  public function setDateOfBirth($date_of_birth) { $this->date_of_birth = $date_of_birth; }
 
   public function getLastName() { return $this->lastName; }
   public function setLastName($lastName) { $this->lastName = $lastName; }
@@ -34,6 +42,9 @@ class Players {
     for ($x = 0; $x < sizeof($this->scores); $x++) {
       echo 'Hole ' . ($x+1) . ': ' . $this->scores[$x] . '<br/>' . "\n";
     }
+  }
+
+  public function printHandicap() {
   }
 }
 ?>
