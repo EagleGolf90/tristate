@@ -25,8 +25,8 @@ class EditScores {
     $ret = $this->sqlTable->execute('updatePlayersScore', $parm);
   }
 
-  public function loadOrganization() {
-    return $this->sqlTable->load('loadOrganizations', array());
-  }
+  public function loadOrganization() { return $this->sqlTable->load('loadOrganizations', array()); }
+
+  public function loadParticipants() { return $this->sqlTable->load('loadHandicapParticipants', array()); }
 }
 ?>

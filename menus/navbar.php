@@ -9,40 +9,40 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Results</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/leaderboard.php?role=admin">Leaderboard</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/two_day.php?role=admin">Two-Day Tournament</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/net_scores.php?role=admin">Two-Day Tournament (Net Scores)</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/leaderboard.php?role=admin">Leaderboard</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/two_day.php?role=admin">Two-Day Tournament</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/net_scores.php?role=admin">Two-Day Tournament (Net Scores)</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Players</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/kdga/admin/addContacts.php">Add Contacts</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/admin/addParticipants.php">Add Participants</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/which_round.php?page=admin/addPairings.php">Add Pairings</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/addContacts.php">Add Contacts</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/addParticipants.php">Add Participants</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/addPairings.php">Add Pairings</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Scores</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/which_round.php?page=admin/groups.php">Enter Scores</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/which_round.php?page=admin/editScores.php">Edit Scores</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/which_round.php?page=admin/allScores.php">All Scores</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/groups.php">Enter Scores</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/editScores.php">Edit Scores</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/allScores.php">All Scores</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Handicaps</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/kdga/admin/enterHandicaps.php">Enter Handicaps</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/admin/editHandicaps.php">Edit Handicaps</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/admin/allHandicaps.php">All Handicaps</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/handicap/enterHandicaps.php">Enter Handicaps</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/editHandicaps.php">Edit Handicaps</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/allHandicaps.php">All Handicaps</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-header" href="#" role="button" data-bs-toggle="dropdown">Manage Skins</a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="https://kdga.org/kdga/admin/manageSkins.php">Skins Participants</a></li>
-            <li><a class="nav-link" href="https://kdga.org/kdga/scores/which_round.php?page=admin/skins.php">Display Skins</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/admin/manageSkins.php">Skins Participants</a></li>
+            <li><a class="nav-link" href="https://kdga.org/tristate/scores/which_round.php?page=admin/skins.php">Display Skins</a></li>
           </ul>
         </li>
 

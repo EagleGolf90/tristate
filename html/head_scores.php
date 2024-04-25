@@ -17,3 +17,4 @@
   .dropdown-header { width: 200px; }
   </style>
   <link href="../html/css/css-styles.css" rel="stylesheet">
+  <script src="../html/js/bootstrap-datepicker.js"></script>

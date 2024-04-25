@@ -1,9 +1,8 @@
 <?php
 include('../preload.php');
-include(INCLUDES . 'initialize_golf.php');
 include(CLASSES . 'edit_scores.class.php');
 $edit = new EditScores();
-$participants = $golf->getParticipants();
+$participants = $edit->loadParticipants();
 $orgs = $edit->loadOrganization();
 
 include(HTML . 'beginHTML.php');
@@ -41,7 +40,7 @@ include(MENUS . 'navbar.php');
 <?php
 foreach ($participants as $participant) {
 ?>
-            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $participant['LastName'] . ', ' . $participant['FirstName'] . ' (' . $participant['Organization'] . ')'; ?></option>
+            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $participant['LastName'] . ', ' . $participant['FirstName']; ?></option>
 <?php
 }
 ?>
@@ -50,6 +49,16 @@ foreach ($participants as $participant) {
         </div>
       </div>
     </div>
+
+    <div row="row">
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="date_entered" id="date_entered">
+          <label for="date_entered">Date Entered</label>
+        </div>
+      </div>
+    </div>
+
     <?php include(INCLUDES . 'submit_button.php'); ?>
 
     <hr/>
