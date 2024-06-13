@@ -18,10 +18,10 @@ include(MENUS . 'navbar.php');
     include(INCLUDES . 'display_message.php');
     ?>
 
-    <div row="row">
+    <div class="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <select name="groupID" class="form-control" required>
+          <select name="groupID" class="form-control" required id="groupID">
             <option value="" selected>Select one</option>
 <?php foreach ($orgs as $org) { ?>
             <option value="<?php echo $org['FieldValue']; ?>"><?php echo $org['LongName']; ?></option>
@@ -32,25 +32,19 @@ include(MENUS . 'navbar.php');
       </div>
     </div>
 
-    <div row="row">
+    <div class="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
-          <select name="playerID" class="form-control" required>
+          <select name="playerID" class="form-control" required id="playerID">
             <option value="" selected>Select one</option>
-<?php
-foreach ($participants as $participant) {
-?>
-            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $participant['LastName'] . ', ' . $participant['FirstName']; ?></option>
-<?php
-}
-?>
+            <span id="spanText"></span>
           </select>
           <label for="playerID">Name</label>
         </div>
       </div>
     </div>
 
-    <div row="row">
+    <div class="row">
       <div class="col-md-12">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" name="date_entered" id="date_entered">
@@ -60,7 +54,6 @@ foreach ($participants as $participant) {
     </div>
 
     <?php include(INCLUDES . 'submit_button.php'); ?>
-
     <hr/>
 
     <?php include('displayPairings.php'); ?>
