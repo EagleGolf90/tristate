@@ -24,10 +24,22 @@ function showGolfers(tagName, orgNo) {
 
 function changeGroup(optionValue) { removeOptions("#playerID", 0); }
 
+function calculateHandicap() {
+  var course_rating = parseFloat($('#course_rating').val());
+  var slope_rating = parseInt($('#slope_rating').val());
+  var score = parseInt($('#score').val());
+  var handicap = (((score - course_rating) * 113) / slope_rating);
+  $('#handicap').text(handicap.toFixed(2));
+}
+
 $(document).ready(function () {
   $("#groupID").change(function () {
     if ($(this).val() != "") {
       showGolfers("#playerID", $(this).val());
     }
+  });
+
+  $('#slope_rating').change(function () {
+    calculateHandicap();
   });
 });

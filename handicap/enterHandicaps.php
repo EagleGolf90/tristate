@@ -51,10 +51,47 @@ include(MENUS . 'navbar.php');
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="score" id="score">
+          <label for="score">Score</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="course_rating" id="course_rating" required>
+          <label for="course_rating">Course Rating</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="slope_rating" id="slope_rating" required>
+          <label for="slope_rating">Slope Rating</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+          <span class="form-control" name="handicap" id="handicap"></span>
+          <label for="handicap">Handicap</label>
+        </div>
+      </div>
+    </div>
+
     <?php include(INCLUDES . 'submit_button.php'); ?>
+
     <hr/>
 
-    <?php include('displayPairings.php'); ?>
+    <?php //include('displayPairings.php'); ?>
   </div>
 </form>
 
