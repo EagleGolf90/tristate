@@ -13,7 +13,8 @@ function showGolfers(tagName, orgNo) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById('spanText').innerHTML = this.responseText;
+      var newOptions = this.responseText;
+      $('#playerID').append(newOptions);
     }
   }
 

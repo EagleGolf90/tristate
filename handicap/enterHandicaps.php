@@ -36,8 +36,6 @@ include(MENUS . 'navbar.php');
       <div class="col-md-12">
         <div class="form-floating mb-3">
           <select name="playerID" class="form-control" required id="playerID">
-            <option value="" selected>Select one</option>
-            <span id="spanText"></span>
           </select>
           <label for="playerID">Name</label>
         </div>
