@@ -11,7 +11,7 @@ $key_value = $_GET['p1'];
 
 $rows = $sqlTable->load('loadContactsByOrg', array($key_value));
 
-$options = '';
+$options = '<option value="" selected>Select one</option>';
 
 foreach ($rows as $row) {
   $options .= '<option value="' . $row['PlayerID'] . '">' . $row['FullName'] . '</option>';
