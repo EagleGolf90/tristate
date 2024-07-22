@@ -91,7 +91,7 @@ include(MENUS . 'navbar.php');
 
     <hr/>
 
-    <?php //include('displayPairings.php'); ?>
+    <span id="addText"></span>
   </div>
 </form>
 
