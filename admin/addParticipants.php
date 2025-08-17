@@ -4,12 +4,15 @@ include(INCLUDES . 'initialize_golf.php');
 $participants = $golf->getParticipants();
 $players_row = $golf->displayParticipants();
 
+$roundPlayed = isset($_POST['roundPlayed']) ? $_POST['roundPlayed'] : 0;
+
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
 ?>
 
 <form class="regForm" action="add.php" method="post">
   <input type="text" name="page" value="participants" hidden>
+  <input type="number" name="roundPlayed" value="<?php echo $golf->getRoundPlayed($roundPlayed); ?>" hidden>
   <div class="container-list">
     <?php
     $display_message = '<h3>Add Participant</h3>';
