@@ -29,7 +29,7 @@ foreach ($skins as $skin) {
 ?>
    <div class="row">
      <div class="col-md-2">&nbsp;</div>
-     <div class="col-md-6 text-center"><h2>Hole <?php echo ($oldHoleNumber+1); ?></h2></div>
+     <div class="col-md-6 text-center"><h2>Hole <?php echo $skin['HoleNumber']; ?></h2></div>
      <div class="col-md-4">&nbsp;</div>
    </div>
 <?php
