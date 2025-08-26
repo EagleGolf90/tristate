@@ -21,7 +21,7 @@ include(MENUS . 'navbar.php');
       <div class="col-md-12">
         <div class="form-floating mb-3">
           <select name="roundPlayed" class="form-control">
-            <option value="" selected>Select one</option>
+            <!-- <option value="" selected>Select one</option> -->
             <?php foreach ($rows as $row) { ?>
             <option value="<?php echo $row['RoundPlayed']; ?>"><?php echo $row['DatePlayed']; ?></option>
             <?php } ?>
@@ -35,7 +35,7 @@ include(MENUS . 'navbar.php');
       <div class="col-md-12">
         <div class="form-floating mb-3">
           <select name="playerID" class="form-control">
-            <option value="" selected>Select one</option>
+            <!-- <option value="" selected>Select one</option> -->
 <?php
 foreach ($participants as $participant) {
   $name_value = $participant['LastName'] . ', ' . $participant['FirstName'] . ' (' . $participant['Organization'] . ')';

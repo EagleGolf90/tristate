@@ -35,6 +35,22 @@ include(MENUS . 'navbar.php');
     <div class="col-md-4">&nbsp;</div>
   </div>
 
+<?php if ($_GET['page'] == 'admin/skins.php') { ?>
+  <div class="row">
+    <div class="col-md-4">&nbsp;</div>
+    <div class="col-md-2">Division</div>
+    <div class="col-md-2">
+      <select name="division" class="form-select">
+        <option value="4">All</option>
+        <option value="1">Open</option>
+        <option value="2">Seniors</option>
+        <option value="3">Super Seniors</option>
+      </select>
+    </div>
+    <div class="col-md-4">&nbsp;</div>
+  </div>
+<?php } ?>
+
   <?php include(INCLUDES . 'submit_button.php'); ?>
 </div>
 </form>
