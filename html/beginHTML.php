@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 <head>
-  <script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
-  <meta charset="utf-8">
-<?php if (PAGE_NAME == 'leaderboard.php' || PAGE_NAME == 'two_day.php') { ?>
-  <meta http-equiv="refresh" content="900">
-<?php } ?>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php include('../head_titles.php'); ?></title>
-  <?php include('css_finder.php'); ?>
+  <?php
+  include('head_meta.php');
+  include('head_titles.php');
+  include('css_finder.php');
+  include('js_load.php');
+  ?>
 </head>
 
 <?php

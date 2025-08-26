@@ -5,6 +5,3 @@
   a { text-decoration: none; }
   body { padding: 50px; }
   </style>
-
-  <!-- Custom Stylesheets -->
-  <link rel="stylesheet" href="css/custom.css">
