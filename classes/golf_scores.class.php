@@ -90,7 +90,7 @@ class GolfScores {
   public function getParticipants() { return $this->sqlTable->load('loadParticipants', array($this->getRoundPlayed(0))); }
   public function displayParticipants() { return $this->sqlTable->load('displayParticipants', array($this->getRoundPlayed(0))); }
 
-  public function displayContacts() { return $this->sqlTable->load('displayContacts', array()); }
+  public function displayContacts($org_id) { return $this->sqlTable->load('displayContacts', array($org_id)); }
 
   public function getPairings($roundPlayed) { return $this->sqlTable->load('loadPairings', array($roundPlayed)); }
   public function displayPairings($roundPlayed) { return $this->sqlTable->load('displayPairings', array($roundPlayed)); }

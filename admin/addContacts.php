@@ -1,7 +1,7 @@
 <?php
 include('../preload.php');
 include(INCLUDES . 'initialize_golf.php');
-$contacts_row = $golf->displayContacts();
+// $contacts_row = $golf->displayContacts();
 
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
@@ -40,7 +40,18 @@ include(MENUS . 'navbar.php');
     <?php include(INCLUDES . 'submit_button.php'); ?>
 
     <hr/>
-    <?php include('displayContacts.php'); ?>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="tabs">
+          <ul>
+            <li><a href="#tabs-1">Indiana</a></li>
+            <li><a href="#tabs-2">Kentucky</a></li>
+            <li><a href="#tabs-3">Ohio</a></li>
+          </ul>
+          <?php include('displayContacts.php'); ?>
+        </div>
+      </div>
+    </div>
   </div>
 </form>
 

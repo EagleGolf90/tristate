@@ -24,6 +24,9 @@ define('INCLUDES', ROOT_PATH . 'includes' . DS);
 define('CLASSES', ROOT_PATH . 'classes' . DS);
 define('HTML', ROOT_PATH . 'html' . DS);
 define('MENUS', ROOT_PATH . 'menus' . DS);
+define('SERVICES', ROOT_PATH . 'services' . DS);
+define('ABSTRACTION_PATH', SERVICES . 'abstraction' . DS);
+define('CONCRETE_PATH', SERVICES . 'concrete' . DS);
 
 include(INCLUDES . 'load.php');
 ?>
