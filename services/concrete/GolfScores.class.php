@@ -8,7 +8,7 @@ class GolfScores {
              ICourseService $courseService,
              IPlayerService $playerService,
              IScoreService $scoreService)
-{
+    {
         $this->courseService = $courseService;
         $this->playerService = $playerService;
         $this->scoreService = $scoreService;
