@@ -26,9 +26,6 @@ class ScoreService implements IScoreService {
                     $player['id'], $scoreData['roundPlayed'], $scoreData['roundID'], $hole + 1, $score
                 ]);
             }
-            // $this->sqlTable->execute('updateScores', [
-            //     $scoreData['roundPlayed'], $player['id'], $totalScore
-            // ]);
         }
         return true;
     }

@@ -57,7 +57,7 @@ class GolfScores {
     return $this->roundPlayed;
   }
 
-  public function getTeamScores($roundPlayed) {
+  public function getTeamScores() {
     $team_scores = array();
     $teams_row = $this->sqlTable->load('loadOrganizations', array());
     foreach ($teams_row as $team_row) {
