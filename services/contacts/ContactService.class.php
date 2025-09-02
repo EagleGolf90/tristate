@@ -14,5 +14,9 @@ class ContactService implements IContactService {
         return $this->sqlTable->load('getAllContacts', array());
     }
 
+    public function getContactById($id) {
+        return $this->sqlTable->load('getContactById', array($id));
+    }
+
 }
 ?>

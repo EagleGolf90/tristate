@@ -1,5 +1,5 @@
 <?php
-class GolfScores {
+class Scores {
     private $courseService;
     private $playerService;
     private $scoreService;

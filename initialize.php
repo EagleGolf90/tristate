@@ -25,8 +25,13 @@ define('CLASSES', ROOT_PATH . 'classes' . DS);
 define('HTML', ROOT_PATH . 'html' . DS);
 define('MENUS', ROOT_PATH . 'menus' . DS);
 define('SERVICES', ROOT_PATH . 'services' . DS);
-define('ABSTRACTION_PATH', SERVICES . 'abstraction' . DS);
 define('CONCRETE_PATH', SERVICES . 'concrete' . DS);
+
+define('CONTACTS_PATH', SERVICES . 'contacts' . DS);
+define('SCORES_PATH', SERVICES . 'scores' . DS);
+define('PLAYERS_PATH', SERVICES . 'players' . DS);
+define('PARTICIPANTS_PATH', SERVICES . 'participants' . DS);
+define('HOLEDETAILS_PATH', SERVICES . 'holedetails' . DS);
 
 include(INCLUDES . 'load.php');
 ?>

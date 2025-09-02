@@ -11,5 +11,9 @@ class Contacts {
         return $this->contactService->getAllContacts();
     }
 
+    public function getContactById($id) {
+        return $this->contactService->getContactById($id);
+    }
+
 }
 ?>
