@@ -4,11 +4,10 @@ $role = strtolower($_GET['role']);
 
 include('../preload.php');
 
-include(CONCRETE_PATH . 'ScoresPresenter.class.php');
-$presenter = new ScoresPresenter();
-
-include(LOAD_PATH . 'loadCourses.php');
-include(LOAD_PATH . 'loadPlayers.php');
+include(INCLUDES . 'initialize_golf.php');
+include(INCLUDES . 'course_init.php');
+$rows = $golf->getLeaderboard();
+$teams = $golf->getTeamScores();
 
 include(HTML . 'beginHTML.php');
 if ($role == 'admin') include(MENUS . 'navbar.php');
@@ -27,11 +26,11 @@ $oldOrganization = '';
 $x = 0;
 $team_cut = 0;
 foreach ($players->getLeaderboard() as $row) {
-  if ($presenter->isTeamFinalCut($team_cut) && $scores_flag == true) echo $presenter->separator();
+  if ($golf->isTeamFinalCut($team_cut) && $scores_flag == true) echo $golf->separator();
 
   if ($oldOrganization != $row['Organization']) {
     $team_cut = 0;
-    if ($presenter->isSecondRowOrMore($x)) {
+    if ($golf->isSecondRowOrMore($x)) {
 ?>
       </table>
     </div>
@@ -45,7 +44,7 @@ foreach ($players->getLeaderboard() as $row) {
 <?php
     $x++;
   }
-  echo $presenter->formatGolferRow($row);
+  echo $golf->printGolferName($row);
   $oldOrganization = $row['Organization'];
   $team_cut++;
 }

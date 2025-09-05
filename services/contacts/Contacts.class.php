@@ -15,5 +15,9 @@ class Contacts {
         return $this->contactService->getContactById($id);
     }
 
+    public function displayContacts($org_id) {
+        return $this->contactService->displayContacts($org_id);
+    }
+
 }
 ?>

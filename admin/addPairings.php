@@ -1,11 +1,7 @@
 <?php
 include('../preload.php');
-include(INCLUDES . 'initialize_golf.php');
-include(INCLUDES . 'course_init.php');
-$pairings = $golf->getPairings($_GET['roundPlayed']);
-$players_row = $golf->displayPairings($_GET['roundPlayed']);
 
-$groupSize = $golf->calculateGroupSize();
+include(LOAD_PATH . 'loadPairings.php');
 
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
@@ -28,6 +24,7 @@ include(MENUS . 'navbar.php');
           <select name="groupID" class="form-control" required>
             <option value="" selected>Select one</option>
 <?php
+$groupSize = $pairings->calculateGroupSize();
 for ($x = 0; $x < $groupSize; $x++) {
   $groupLetter = chr(65+$x);
 ?>
@@ -47,7 +44,7 @@ for ($x = 0; $x < $groupSize; $x++) {
           <select name="playerID" class="form-control" required>
             <option value="" selected>Select one</option>
 <?php
-foreach ($pairings as $pairing) {
+foreach ($pairings->getPairings($_GET['roundPlayed']) as $pairing) {
 ?>
             <option value="<?php echo $pairing['PlayerID']; ?>"><?php echo $pairing['LastName'] . ', ' . $pairing['FirstName'] . ' (' . $pairing['Organization'] . ')'; ?></option>
 <?php

@@ -1,7 +1,10 @@
 <?php
 include('../preload.php');
-include(INCLUDES . 'initialize_golf.php');
-// $contacts_row = $golf->displayContacts();
+
+include(CONCRETE_PATH . 'Presenter.class.php');
+$presenter = new Presenter();
+
+include(LOAD_PATH . 'loadContacts.php');
 
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
@@ -10,10 +13,7 @@ include(MENUS . 'navbar.php');
 <form class="regForm" action="add.php" method="post">
   <input type="text" name="page" value="contacts" hidden>
   <div class="container-form">
-    <?php
-    $display_message = '<h3>Add Contact</h3>';
-    include(INCLUDES . 'display_message.php');
-    ?>
+    <?php $presenter->formatHtmlString('<h3>Add Contact</h3>'); ?>
 
     <div row="row">
       <div class="col-md-12">

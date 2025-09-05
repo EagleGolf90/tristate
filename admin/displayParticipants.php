@@ -5,12 +5,11 @@
 $count = 0;
 $tristate = 0;
 $two_day = 0;
-foreach ($players_row as $display) {
-  $name_value = $display['LastName'] . ', ' . $display['FirstName'];
+foreach ($participants->displayParticipants() as $display) {
   $delete_link = 'delete.php?page=participants&id=' . $display['PlayerID'];
 ?>
         <tr>
-          <td><?php echo $name_value; ?></td>
+          <td><?php echo $display['LastName'] . ', ' . $display['FirstName']; ?></td>
           <td><?php echo $display['Organization']; ?></td>
           <td><?php echo $display['PlayerChoice']; ?></td>
           <td><a href="<?php echo $delete_link; ?>">Delete</d></td>

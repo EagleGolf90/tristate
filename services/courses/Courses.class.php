@@ -1,22 +1,19 @@
 <?php
 class Courses {
     private $courseService;
-    private $holeDetailsService;
 
-    public function __construct(
-              ICourseService $courseService,
-              IHoleDetailsService $holeDetailsService)
+    public function __construct(ICourseService $courseService)
     {
         $this->courseService = $courseService;
         $this->holeDetailsService = $holeDetailsService;
     }
 
-    public function getCourseById($courseID) {
-        return $this->courseService->getCourseById($courseID);
+    public function getCourseInfo() {
+        return $this->courseService->getCourseInfo();
     }
 
-    public function getHoleDetailsById($courseID) {
-        return $this->holeDetailsService->getHoleDetailsById($courseID);
+    public function getCourseDetails($courseID) {
+        return $this->courseService->getCourseDetails($courseID);
     }
 
 }

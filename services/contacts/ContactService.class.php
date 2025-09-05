@@ -1,6 +1,8 @@
 <?php
 interface IContactService {
     public function getAllContacts();
+    public function getContactById($id);
+    public function displayContacts($org_id);
 }
 
 class ContactService implements IContactService {
@@ -15,7 +17,11 @@ class ContactService implements IContactService {
     }
 
     public function getContactById($id) {
-        return $this->sqlTable->load('getContactById', array($id));
+        return $this->sqlTable->load('getContactsById', array($id));
+    }
+
+    public function displayContacts($org_id) {
+        return $this->sqlTable->load('displayContacts', array($org_id));
     }
 
 }

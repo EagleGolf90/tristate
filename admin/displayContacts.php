@@ -1,6 +1,6 @@
 <?php
 for ($x = 1; $x <= 3; $x++) {
-  $contacts_row = $golf->displayContacts($x);
+  $contacts_row = $contacts->displayContacts($x);
 ?>
         <div id="tabs-<?php echo $x; ?>">
           <table class="table table-bordered">
@@ -18,11 +18,9 @@ for ($x = 1; $x <= 3; $x++) {
     $count += 1;
   }
 ?>
-          <tr><td colspan="2"><b>Total: <?php echo $count; ?></b></td></tr>
+          <tr><td colspan="3"><b>Total: <?php echo $count; ?></b></td></tr>
           </table>
         </div>
-      </div>
-    </div>
 <?php
 }
 ?>

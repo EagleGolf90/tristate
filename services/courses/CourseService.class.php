@@ -1,6 +1,6 @@
 <?php
 interface ICourseService {
-    public function getCourseInfo($roundPlayed);
+    public function getCourseInfo();
     public function getCourseDetails($courseID);
 }
 
@@ -11,8 +11,8 @@ class CourseService implements ICourseService {
         $this->sqlTable = $sqlTable;
     }
 
-    public function getCourseInfo($roundPlayed) {
-        return $this->sqlTable->load('loadCourseInfo', array($roundPlayed));
+    public function getCourseInfo() {
+        return $this->sqlTable->load('loadCourseInfo', array());
     }
 
     public function getCourseDetails($courseID) {

@@ -3,6 +3,7 @@ include('../preload.php');
 include(INCLUDES . 'initialize_golf.php');
 $champions = $golf->getChampions();
 $champions_row = $golf->displayChampions();
+$year_founded = 1992;
 
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
@@ -22,7 +23,7 @@ include(MENUS . 'navbar.php');
           <select name="year_played" class="form-control">
             <option value="" selected>Select one</option>
 <?php for ($x = 0; $x < 32; $x++) { ?>
-            <option value="<?php echo (1992 + $x); ?>"><?php echo (1992 + $x); ?></option>
+            <option value="<?php echo ($year_founded + $x); ?>"><?php echo ($year_founded + $x); ?></option>
 <?php } ?>
           </select>
           <label for="year_played">Year Played</label>

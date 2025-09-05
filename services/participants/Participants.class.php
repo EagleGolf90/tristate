@@ -15,6 +15,13 @@ class Participants {
         return $this->participantService->getSkinsParticipantsByRound($roundPlayed);
     }
 
-}
+    public function displayParticipants($roundPlayed) {
+        return $this->participantService->displayParticipants($roundPlayed);
+    }
 
+    public function getRoundPlayed() {
+        return $this->participantService->getRoundPlayed();
+    }
+
+}
 ?>
