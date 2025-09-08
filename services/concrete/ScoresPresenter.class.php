@@ -41,5 +41,23 @@ class ScoresPresenter
         return '<hr/>';
     }
 
+    public function formatTitle($title)
+    {
+        return '<h3 style="text-align: center">' . $title . '</h3>';
+    }
+
+    public function formatString($html)
+    {
+        return $html;
+    }
+
+    public function formatName($r) {
+        return $r['LastName'] . ', ' . $r['FirstName'];
+    }
+
+    public function formatNameOrg($row) {
+        return $this->formatName($row) . ' (' . $row['Organization'] . ')';
+    }
+
 }
 ?>

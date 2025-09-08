@@ -12,7 +12,7 @@ foreach ($pairings->displayPairings($_GET['roundPlayed']) as $display) {
 <?php
   }
 ?>
-        <tr><td><?php echo $display['Organization']; ?></td><td><?php echo $display['LastName'] . ', ' . $display['FirstName']; ?></td></tr>
+        <tr><td><?php echo $display['Organization']; ?></td><td><?php echo $presenter->formatName($display); ?></td></tr>
 <?php
   $oldGroupID = $display['GroupID'];
   $count += 1;

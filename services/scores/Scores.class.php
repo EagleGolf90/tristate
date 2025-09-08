@@ -26,8 +26,24 @@ class Scores {
         return $this->scoreService->getTeamScores($org_id);
     }
 
+    public function getAllScores() {
+        return $this->sqlTable->load('loadAllScores', array($roundPlayed));
+    }
+
+    public function getScoresByRound($roundPlayed) {
+        return $this->scoreService->getScoresByRound($roundPlayed);
+    }
+
     public function addScores($scoreData) {
         return $this->scoreService->addScores($scoreData);
+    }
+
+    public function getRounds() {
+        return $this->scoreService->getRounds();
+    }
+
+    public function getCurrentRound() {
+        return $this->scoreService->getCurrentRound();
     }
 
 }

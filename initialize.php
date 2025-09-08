@@ -36,6 +36,7 @@ define('PLAYERS_PATH', SERVICES . 'players' . DS);
 define('PARTICIPANTS_PATH', SERVICES . 'participants' . DS);
 define('HOLEDETAILS_PATH', SERVICES . 'holedetails' . DS);
 define('PAIRINGS_PATH', SERVICES . 'pairings' . DS);
+define('TRANSLATES_PATH', SERVICES . 'translate' . DS);
 
 include(INCLUDES . 'load.php');
 ?>

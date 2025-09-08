@@ -1,6 +1,6 @@
 <?php
 class Presenter {
-    public function formatHtmlString($htmlFormatter): string
+    public function formatHtmlString($htmlFormatter)
     {
         return $htmlFormatter;
     }

@@ -2,7 +2,10 @@
 if (!isset($_GET['page'])) die('Must have page parameter. Please try again.');
 
 include('../preload.php');
-include(INCLUDES . 'initialize_golf.php');
+include(LOAD_PATH . 'loadTranslates.php');
+include(LOAD_PATH . 'loadScores.php');
+include(CONCRETE_PATH . 'ScoresPresenter.class.php');
+$presenter = new ScoresPresenter();
 
 $script_file = TRISTATE_URL . $_GET['page'];
 
@@ -12,10 +15,7 @@ include(MENUS . 'navbar.php');
 
 <form method="get" action="<?php echo $script_file; ?>" name="skinsForm">
 <div class="container">
-  <?php
-  $display_message = '<h1>Tri-State Cup 2023</h1>';
-  include(INCLUDES . 'display_message.php');
-  ?>
+  <?php echo $presenter->formatTitle('Tri-State Cup'); ?>
   <hr/>
 
   <div class="row">
@@ -23,13 +23,9 @@ include(MENUS . 'navbar.php');
     <div class="col-md-2">Date Played</div>
     <div class="col-md-2">
       <select name="roundPlayed" class="form-select">
-      <?php
-      foreach ($rounds as $row) {
-?>
+      <?php foreach ($golf->getRounds() as $row) { ?>
         <option value="<?php echo $row['RoundPlayed']; ?>"><?php echo $row['DatePlayed']; ?></option>
-<?php
-      }
-?>
+      <?php } ?>
       </select>
     </div>
     <div class="col-md-4">&nbsp;</div>

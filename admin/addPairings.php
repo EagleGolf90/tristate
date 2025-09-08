@@ -2,6 +2,8 @@
 include('../preload.php');
 
 include(LOAD_PATH . 'loadPairings.php');
+include(CONCRETE_PATH . 'ScoresPresenter.class.php');
+$presenter = new ScoresPresenter();
 
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
@@ -13,10 +15,7 @@ include(MENUS . 'navbar.php');
   <input type="number" name="holeNumber" value="1" hidden>
 
   <div class="container-form">
-    <?php
-    $display_message = '<h3>Add Pairing<br/>' . $date_played . '</h3>';
-    include(INCLUDES . 'display_message.php');
-    ?>
+    <?php echo $presenter->formatTitle('Add Pairing<br/>' . $date_played); ?>
 
     <div row="row">
       <div class="col-md-12">
@@ -24,8 +23,7 @@ include(MENUS . 'navbar.php');
           <select name="groupID" class="form-control" required>
             <option value="" selected>Select one</option>
 <?php
-$groupSize = $pairings->calculateGroupSize();
-for ($x = 0; $x < $groupSize; $x++) {
+for ($x = 0; $x < $pairings->calculateGroupSize(); $x++) {
   $groupLetter = chr(65+$x);
 ?>
             <option value="<?php echo $groupLetter; ?>"><?php echo $groupLetter; ?></option>
@@ -46,7 +44,7 @@ for ($x = 0; $x < $groupSize; $x++) {
 <?php
 foreach ($pairings->getPairings($_GET['roundPlayed']) as $pairing) {
 ?>
-            <option value="<?php echo $pairing['PlayerID']; ?>"><?php echo $pairing['LastName'] . ', ' . $pairing['FirstName'] . ' (' . $pairing['Organization'] . ')'; ?></option>
+            <option value="<?php echo $pairing['PlayerID']; ?>"><?php echo $presenter->formatNameOrg($pairing); ?></option>
 <?php
 }
 ?>

@@ -11,5 +11,12 @@ class HoleDetails {
         return $this->holeDetailsService->getHoleDetailsById($courseID);
     }
 
+    public function getHoleDetailsByRound() {
+        return $this->holeDetailsService->getHoleDetailsByRound();
+    }
+
+    public function getHoleHandicaps() {
+        return $this->holeDetailsService->getHoleHandicaps();
+    }
 }
 ?>

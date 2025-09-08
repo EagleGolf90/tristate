@@ -31,7 +31,9 @@ class ParticipantService implements IParticipantService {
     }
 
     public function getRoundPlayed() {
-        return $this->sqlTable->load('loadSetup', array());
+        $rows = $this->sqlTable->load('loadSetup', array());
+        foreach ($rows as $row) $roundPlayed = $row['RoundPlayed'];
+        return empty($roundPlayed) ? 0 : $roundPlayed;
     }
 
 }

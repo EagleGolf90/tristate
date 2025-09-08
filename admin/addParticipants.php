@@ -2,8 +2,8 @@
 include('../preload.php');
 
 include(LOAD_PATH . 'loadParticipants.php');
-include(CONCRETE_PATH . 'Presenter.class.php');
-$presenter = new Presenter();
+include(CONCRETE_PATH . 'ScoresPresenter.class.php');
+$presenter = new ScoresPresenter();
 
 include(HTML . 'beginHTML.php');
 include(MENUS . 'navbar.php');
@@ -12,8 +12,8 @@ include(MENUS . 'navbar.php');
 <form class="regForm" action="add.php" method="post">
   <input type="text" name="page" value="participants" hidden>
   <input type="number" name="roundPlayed" value="<?php echo $participants->getRoundPlayed(); ?>" hidden>
-  <div class="container-list">
-    <?php $presenter->formatHtmlString('<h3>Add Participant</h3>'); ?>
+  <div class="container-list text-center">
+    <?php echo $presenter->formatTitle('Add Participant'); ?>
 
     <div row="row">
       <div class="col-md-12">
@@ -22,9 +22,8 @@ include(MENUS . 'navbar.php');
             <option value="" selected>Select one</option>
 <?php
 foreach ($participants->getParticipants() as $participant) {
-  $name_value = $participant['LastName'] . ', ' . $participant['FirstName'] . ' (' . $participant['Organization'] . ')';
 ?>
-            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $name_value; ?></option>
+            <option value="<?php echo $participant['PlayerID']; ?>"><?php echo $presenter->formatNameOrg($participant); ?></option>
 <?php
 }
 ?>
