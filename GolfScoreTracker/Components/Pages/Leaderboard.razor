@@ -1,0 +1,178 @@
+@page "/leaderboard"
+@using GolfScoreTracker.Services
+@using GolfScoreTracker.Models
+@inject IGolfService GolfService
+@rendermode InteractiveServer
+
+<PageTitle>Leaderboard - Golf Score Tracker</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-4">
+                <i class="fas fa-trophy text-warning"></i> Tournament Leaderboard
+            </h1>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="roundSelect" class="form-label">Select Round:</label>
+            <select id="roundSelect" class="form-select" @onchange="OnRoundChanged">
+                <option value="">All Rounds</option>
+                @if (rounds != null)
+                {
+                    @foreach (var round in rounds)
+                    {
+                        <option value="@round.Id" selected="@(selectedRoundId == round.Id)">
+                            @round.Name - @round.Date.ToString("MMM dd, yyyy")
+                        </option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+            <button class="btn btn-primary" @onclick="RefreshLeaderboard">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else if (groupedPlayers?.Any() == true)
+    {
+        <div class="row">
+            @foreach (var orgGroup in groupedPlayers)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                @orgGroup.Key.Name
+                                @if (teamScores.ContainsKey(orgGroup.Key.Id))
+                                {
+                                    <span class="badge bg-light text-dark ms-2">Team: @teamScores[orgGroup.Key.Id]</span>
+                                }
+                            </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th>Player</th>
+                                        <th>Score</th>
+                                        <th>To Par</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var position = 1;
+                                    }
+                                    @foreach (var player in orgGroup.OrderBy(p => p.TotalScore))
+                                    {
+                                        var toPar = player.TotalScore - (player.Scores.Sum(s => s.Hole.Par));
+                                        var positionInOverall = allPlayers.IndexOf(player) + 1;
+                                        
+                                        <tr class="@(position <= 4 ? "table-success" : "")">
+                                            <td>
+                                                <strong>@positionInOverall</strong>
+                                                @if (positionInOverall == 1)
+                                                {
+                                                    <i class="fas fa-crown text-warning ms-1"></i>
+                                                }
+                                                else if (positionInOverall <= 3)
+                                                {
+                                                    <i class="fas fa-medal text-warning ms-1"></i>
+                                                }
+                                            </td>
+                                            <td>
+                                                <strong>@player.FirstName @player.LastName</strong>
+                                                @if (player.Handicap.HasValue)
+                                                {
+                                                    <br><small class="text-muted">HC: @player.Handicap</small>
+                                                }
+                                            </td>
+                                            <td><strong>@player.TotalScore</strong></td>
+                                            <td class="@(toPar < 0 ? "text-success" : toPar > 0 ? "text-danger" : "")">
+                                                <strong>@(toPar == 0 ? "E" : toPar > 0 ? $"+{toPar}" : toPar.ToString())</strong>
+                                            </td>
+                                        </tr>
+                                        position++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <h4>No scores available</h4>
+            <p>No player scores have been entered yet.</p>
+            <a href="/scores" class="btn btn-primary">Enter Scores</a>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Round>? rounds;
+    private List<Player> allPlayers = new();
+    private IGrouping<Organization, Player>[]? groupedPlayers;
+    private Dictionary<int, int> teamScores = new();
+    private int? selectedRoundId;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        rounds = await GolfService.GetRoundsAsync();
+        await LoadLeaderboard();
+    }
+
+    private async Task OnRoundChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var roundId))
+        {
+            selectedRoundId = roundId;
+        }
+        else
+        {
+            selectedRoundId = null;
+        }
+        
+        await LoadLeaderboard();
+    }
+
+    private async Task RefreshLeaderboard()
+    {
+        await LoadLeaderboard();
+    }
+
+    private async Task LoadLeaderboard()
+    {
+        isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            allPlayers = await GolfService.GetLeaderboardAsync(selectedRoundId);
+            groupedPlayers = allPlayers.GroupBy(p => p.Organization).ToArray();
+            teamScores = await GolfService.GetTeamScoresAsync(selectedRoundId);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+}

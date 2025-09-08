@@ -1,0 +1,364 @@
+@page "/scores"
+@using GolfScoreTracker.Services
+@using GolfScoreTracker.Models
+@inject IGolfService GolfService
+@rendermode InteractiveServer
+
+<PageTitle>Score Entry - Golf Score Tracker</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-4">
+                <i class="fas fa-edit text-success"></i> Score Entry
+            </h1>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <label for="roundSelect" class="form-label">Round:</label>
+            <select id="roundSelect" class="form-select" @onchange="OnRoundChanged">
+                <option value="">Select Round</option>
+                @if (rounds != null)
+                {
+                    @foreach (var round in rounds)
+                    {
+                        <option value="@round.Id" selected="@(selectedRoundId == round.Id)">
+                            @round.Name - @round.Date.ToString("MMM dd, yyyy")
+                        </option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="playerSelect" class="form-label">Player:</label>
+            <select id="playerSelect" class="form-select" @onchange="OnPlayerChanged">
+                <option value="">Select Player</option>
+                @if (players != null)
+                {
+                    @foreach (var player in players)
+                    {
+                        <option value="@player.Id" selected="@(selectedPlayerId == player.Id)">
+                            @player.FullName (@player.Organization.Name)
+                        </option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button class="btn btn-primary" @onclick="LoadScorecard" disabled="@(selectedRoundId == null || selectedPlayerId == null)">
+                <i class="fas fa-golf-ball"></i> Load Scorecard
+            </button>
+        </div>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else if (courseHoles?.Any() == true && selectedPlayer != null && selectedRound != null)
+    {
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    Scorecard: @selectedPlayer.FullName - @selectedRound.Name
+                    <span class="float-end">
+                        Total: @currentScores.Where(kvp => kvp.Value > 0).Sum(kvp => kvp.Value)
+                    </span>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Hole</th>
+                                @foreach (var hole in courseHoles.Take(9))
+                                {
+                                    <th class="text-center">@hole.Number</th>
+                                }
+                                <th class="bg-primary text-white text-center">Out</th>
+                                @foreach (var hole in courseHoles.Skip(9))
+                                {
+                                    <th class="text-center">@hole.Number</th>
+                                }
+                                <th class="bg-primary text-white text-center">In</th>
+                                <th class="bg-warning text-dark text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Par</strong></td>
+                                @{
+                                    var frontNinePar = courseHoles.Take(9).Sum(h => h.Par);
+                                    var backNinePar = courseHoles.Skip(9).Sum(h => h.Par);
+                                    var totalPar = frontNinePar + backNinePar;
+                                }
+                                @foreach (var hole in courseHoles.Take(9))
+                                {
+                                    <td class="text-center"><strong>@hole.Par</strong></td>
+                                }
+                                <td class="bg-primary text-white text-center"><strong>@frontNinePar</strong></td>
+                                @foreach (var hole in courseHoles.Skip(9))
+                                {
+                                    <td class="text-center"><strong>@hole.Par</strong></td>
+                                }
+                                <td class="bg-primary text-white text-center"><strong>@backNinePar</strong></td>
+                                <td class="bg-warning text-dark text-center"><strong>@totalPar</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Score</strong></td>
+                                @{
+                                    var frontNineScore = courseHoles.Take(9).Sum(h => currentScores.ContainsKey(h.Id) ? currentScores[h.Id] : 0);
+                                    var backNineScore = courseHoles.Skip(9).Sum(h => currentScores.ContainsKey(h.Id) ? currentScores[h.Id] : 0);
+                                    var totalScore = frontNineScore + backNineScore;
+                                }
+                                @foreach (var hole in courseHoles.Take(9))
+                                {
+                                    <td class="text-center">
+                                        <input type="number" class="form-control form-control-sm text-center" 
+                                               min="1" max="15" 
+                                               value="@(currentScores.ContainsKey(hole.Id) ? currentScores[hole.Id] : 0)"
+                                               @onchange="@(e => UpdateScore(hole.Id, e))" />
+                                    </td>
+                                }
+                                <td class="bg-primary text-white text-center"><strong>@(frontNineScore > 0 ? frontNineScore : "")</strong></td>
+                                @foreach (var hole in courseHoles.Skip(9))
+                                {
+                                    <td class="text-center">
+                                        <input type="number" class="form-control form-control-sm text-center" 
+                                               min="1" max="15" 
+                                               value="@(currentScores.ContainsKey(hole.Id) ? currentScores[hole.Id] : 0)"
+                                               @onchange="@(e => UpdateScore(hole.Id, e))" />
+                                    </td>
+                                }
+                                <td class="bg-primary text-white text-center"><strong>@(backNineScore > 0 ? backNineScore : "")</strong></td>
+                                <td class="bg-warning text-dark text-center"><strong>@(totalScore > 0 ? totalScore : "")</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>To Par</strong></td>
+                                @foreach (var hole in courseHoles.Take(9))
+                                {
+                                    var score = currentScores.ContainsKey(hole.Id) ? currentScores[hole.Id] : 0;
+                                    var toPar = score > 0 ? score - hole.Par : 0;
+                                    <td class="text-center">
+                                        @if (score > 0)
+                                        {
+                                            <span class="@(toPar < 0 ? "text-success" : toPar > 0 ? "text-danger" : "")">
+                                                @(toPar == 0 ? "E" : toPar > 0 ? $"+{toPar}" : toPar.ToString())
+                                            </span>
+                                        }
+                                    </td>
+                                }
+                                <td class="bg-primary text-white text-center">
+                                    @if (frontNineScore > 0)
+                                    {
+                                        var frontToPar = frontNineScore - frontNinePar;
+                                        <strong class="@(frontToPar < 0 ? "text-success" : frontToPar > 0 ? "text-danger" : "")">
+                                            @(frontToPar == 0 ? "E" : frontToPar > 0 ? $"+{frontToPar}" : frontToPar.ToString())
+                                        </strong>
+                                    }
+                                </td>
+                                @foreach (var hole in courseHoles.Skip(9))
+                                {
+                                    var score = currentScores.ContainsKey(hole.Id) ? currentScores[hole.Id] : 0;
+                                    var toPar = score > 0 ? score - hole.Par : 0;
+                                    <td class="text-center">
+                                        @if (score > 0)
+                                        {
+                                            <span class="@(toPar < 0 ? "text-success" : toPar > 0 ? "text-danger" : "")">
+                                                @(toPar == 0 ? "E" : toPar > 0 ? $"+{toPar}" : toPar.ToString())
+                                            </span>
+                                        }
+                                    </td>
+                                }
+                                <td class="bg-primary text-white text-center">
+                                    @if (backNineScore > 0)
+                                    {
+                                        var backToPar = backNineScore - backNinePar;
+                                        <strong class="@(backToPar < 0 ? "text-success" : backToPar > 0 ? "text-danger" : "")">
+                                            @(backToPar == 0 ? "E" : backToPar > 0 ? $"+{backToPar}" : backToPar.ToString())
+                                        </strong>
+                                    }
+                                </td>
+                                <td class="bg-warning text-dark text-center">
+                                    @if (totalScore > 0)
+                                    {
+                                        var totalToPar = totalScore - totalPar;
+                                        <strong class="@(totalToPar < 0 ? "text-success" : totalToPar > 0 ? "text-danger" : "")">
+                                            @(totalToPar == 0 ? "E" : totalToPar > 0 ? $"+{totalToPar}" : totalToPar.ToString())
+                                        </strong>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <button class="btn btn-success btn-lg" @onclick="SaveScores">
+                        <i class="fas fa-save"></i> Save Scores
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+    else if (selectedRoundId != null && selectedPlayerId != null)
+    {
+        <div class="alert alert-warning">
+            <h4>No course data available</h4>
+            <p>Unable to load course information for the selected round.</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <h4>Select Round and Player</h4>
+            <p>Please select both a round and a player to begin score entry.</p>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Round>? rounds;
+    private List<Player>? players;
+    private List<Hole>? courseHoles;
+    private Player? selectedPlayer;
+    private Round? selectedRound;
+    private int? selectedRoundId;
+    private int? selectedPlayerId;
+    private Dictionary<int, int> currentScores = new(); // HoleId -> Score
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        rounds = await GolfService.GetRoundsAsync();
+        players = await GolfService.GetPlayersAsync();
+    }
+
+    private async Task OnRoundChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var roundId))
+        {
+            selectedRoundId = roundId;
+            selectedRound = rounds?.FirstOrDefault(r => r.Id == roundId);
+        }
+        else
+        {
+            selectedRoundId = null;
+            selectedRound = null;
+        }
+        
+        courseHoles = null;
+        currentScores.Clear();
+        StateHasChanged();
+    }
+
+    private async Task OnPlayerChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var playerId))
+        {
+            selectedPlayerId = playerId;
+            selectedPlayer = players?.FirstOrDefault(p => p.Id == playerId);
+        }
+        else
+        {
+            selectedPlayerId = null;
+            selectedPlayer = null;
+        }
+        
+        currentScores.Clear();
+        StateHasChanged();
+    }
+
+    private async Task LoadScorecard()
+    {
+        if (selectedRoundId == null || selectedPlayerId == null || selectedRound == null)
+            return;
+
+        isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            // Load course holes
+            var course = await GolfService.GetCourseWithHolesAsync(selectedRound.CourseId);
+            courseHoles = course?.Holes.OrderBy(h => h.Number).ToList();
+
+            // Load existing scores
+            var existingScores = await GolfService.GetScoresForPlayerRoundAsync(selectedPlayerId.Value, selectedRoundId.Value);
+            currentScores.Clear();
+            foreach (var score in existingScores)
+            {
+                currentScores[score.HoleId] = score.StrokeCount;
+            }
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void UpdateScore(int holeId, ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var score) && score >= 1 && score <= 15)
+        {
+            currentScores[holeId] = score;
+        }
+        else if (currentScores.ContainsKey(holeId))
+        {
+            currentScores.Remove(holeId);
+        }
+        StateHasChanged();
+    }
+
+    private async Task SaveScores()
+    {
+        if (selectedPlayerId == null || selectedRoundId == null || courseHoles == null)
+            return;
+
+        try
+        {
+            // Get existing scores to update or create new ones
+            var existingScores = await GolfService.GetScoresForPlayerRoundAsync(selectedPlayerId.Value, selectedRoundId.Value);
+
+            foreach (var holeScore in currentScores)
+            {
+                var existingScore = existingScores.FirstOrDefault(s => s.HoleId == holeScore.Key);
+                
+                if (existingScore != null)
+                {
+                    // Update existing score
+                    existingScore.StrokeCount = holeScore.Value;
+                    await GolfService.UpdateScoreAsync(existingScore);
+                }
+                else
+                {
+                    // Create new score
+                    var newScore = new Score
+                    {
+                        PlayerId = selectedPlayerId.Value,
+                        HoleId = holeScore.Key,
+                        RoundId = selectedRoundId.Value,
+                        StrokeCount = holeScore.Value
+                    };
+                    await GolfService.AddScoreAsync(newScore);
+                }
+            }
+
+            // Show success message (you could add a toast notification here)
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            // Handle error (you could add error notification here)
+            Console.WriteLine($"Error saving scores: {ex.Message}");
+        }
+    }
+}

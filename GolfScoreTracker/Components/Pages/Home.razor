@@ -1,0 +1,122 @@
+﻿@page "/"
+@using GolfScoreTracker.Services
+@using GolfScoreTracker.Models
+@inject IGolfService GolfService
+
+<PageTitle>Golf Score Tracker</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-4">
+                <i class="fas fa-golf-ball"></i> Golf Score Tracker
+            </h1>
+            <p class="lead text-center">Track your golf tournament scores and leaderboard</p>
+        </div>
+    </div>
+    
+    @if (currentRound != null)
+    {
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-flag"></i> Current Round: @currentRound.Name</h5>
+                    <p class="mb-0">Course: @currentRound.Course.Name | Date: @currentRound.Date.ToString("MMM dd, yyyy")</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Leaderboard</h5>
+                    <p class="card-text">View current tournament standings</p>
+                    <a href="/leaderboard" class="btn btn-primary">View Leaderboard</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-edit fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Enter Scores</h5>
+                    <p class="card-text">Record scores for players</p>
+                    <a href="/scores" class="btn btn-success">Enter Scores</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Players</h5>
+                    <p class="card-text">Manage tournament players</p>
+                    <a href="/players" class="btn btn-info">Manage Players</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (leaderboard?.Any() == true)
+    {
+        <div class="row mt-4">
+            <div class="col-12">
+                <h3>Quick Leaderboard</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Position</th>
+                                <th>Player</th>
+                                <th>Organization</th>
+                                <th>Total Score</th>
+                                <th>To Par</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Math.Min(5, leaderboard.Count); i++)
+                            {
+                                var player = leaderboard[i];
+                                var toPar = player.TotalScore - (player.Scores.Sum(s => s.Hole.Par));
+                                <tr>
+                                    <td>
+                                        @if (i == 0)
+                                        {
+                                            <i class="fas fa-crown text-warning"></i>
+                                        }
+                                        @(i + 1)
+                                    </td>
+                                    <td>@player.FullName</td>
+                                    <td>@player.Organization.Name</td>
+                                    <td>@player.TotalScore</td>
+                                    <td class="@(toPar < 0 ? "text-success" : toPar > 0 ? "text-danger" : "")">
+                                        @(toPar == 0 ? "E" : toPar > 0 ? $"+{toPar}" : toPar.ToString())
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <a href="/leaderboard" class="btn btn-outline-primary">View Full Leaderboard</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Player>? leaderboard;
+    private Round? currentRound;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentRound = await GolfService.GetCurrentRoundAsync();
+        leaderboard = await GolfService.GetLeaderboardAsync();
+    }
+}

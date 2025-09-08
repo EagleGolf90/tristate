@@ -9,3 +9,16 @@ menus/backup/*
 html/menu.html
 html/css/css-styles.css
 classes/backup/*
+
+# .NET Core build artifacts
+**/bin/
+**/obj/
+**/*.user
+**/*.suo
+**/*.cache
+**/packages/
+*.log
+
+# Database files (keep golf.db for demo)
+*.db
+!golf.db

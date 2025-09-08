@@ -1,0 +1,38 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">
+            <i class="fas fa-golf-ball"></i> Golf Score Tracker
+        </a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="fas fa-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="leaderboard">
+                <span class="fas fa-trophy" aria-hidden="true"></span> Leaderboard
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="scores">
+                <span class="fas fa-edit" aria-hidden="true"></span> Score Entry
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="players">
+                <span class="fas fa-users" aria-hidden="true"></span> Players
+            </NavLink>
+        </div>
+    </nav>
+</div>
+

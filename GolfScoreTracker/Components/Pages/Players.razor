@@ -1,0 +1,292 @@
+@page "/players"
+@using GolfScoreTracker.Services
+@using GolfScoreTracker.Models
+@inject IGolfService GolfService
+@rendermode InteractiveServer
+
+<PageTitle>Players - Golf Score Tracker</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-4">
+                <i class="fas fa-users text-info"></i> Tournament Players
+            </h1>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <button class="btn btn-primary" @onclick="ShowAddPlayerModal">
+                <i class="fas fa-plus"></i> Add New Player
+            </button>
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Search players..." @oninput="OnSearchChanged" />
+        </div>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else if (filteredPlayers?.Any() == true)
+    {
+        <div class="row">
+            @foreach (var orgGroup in filteredPlayers.GroupBy(p => p.Organization))
+            {
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">@orgGroup.Key.Name (@orgGroup.Count() players)</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Handicap</th>
+                                            <th>Rounds Played</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var player in orgGroup.OrderBy(p => p.LastName))
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <strong>@player.FullName</strong>
+                                                </td>
+                                                <td>
+                                                    @if (!string.IsNullOrEmpty(player.Email))
+                                                    {
+                                                        <a href="mailto:@player.Email">@player.Email</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-muted">-</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (player.Handicap.HasValue)
+                                                    {
+                                                        <span class="badge bg-secondary">@player.Handicap</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-muted">-</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        var roundsPlayed = player.Scores.Select(s => s.RoundId).Distinct().Count();
+                                                    }
+                                                    @if (roundsPlayed > 0)
+                                                    {
+                                                        <span class="badge bg-success">@roundsPlayed</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-muted">0</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <h4>No players found</h4>
+            <p>@(string.IsNullOrEmpty(searchTerm) ? "No players have been registered yet." : $"No players match '{searchTerm}'.")</p>
+            @if (string.IsNullOrEmpty(searchTerm))
+            {
+                <button class="btn btn-primary" @onclick="ShowAddPlayerModal">
+                    <i class="fas fa-plus"></i> Add First Player
+                </button>
+            }
+        </div>
+    }
+</div>
+
+<!-- Add Player Modal -->
+@if (showAddPlayerModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Player</h5>
+                    <button type="button" class="btn-close" @onclick="HideAddPlayerModal"></button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="newPlayer" OnValidSubmit="AddPlayer">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary class="alert alert-danger" />
+                        
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <InputText id="firstName" class="form-control" @bind-Value="newPlayer.FirstName" />
+                            <ValidationMessage For="@(() => newPlayer.FirstName)" />
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <InputText id="lastName" class="form-control" @bind-Value="newPlayer.LastName" />
+                            <ValidationMessage For="@(() => newPlayer.LastName)" />
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <InputText id="email" class="form-control" @bind-Value="newPlayer.Email" type="email" />
+                            <ValidationMessage For="@(() => newPlayer.Email)" />
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="handicap" class="form-label">Handicap</label>
+                            <InputNumber id="handicap" class="form-control" @bind-Value="newPlayer.Handicap" />
+                            <ValidationMessage For="@(() => newPlayer.Handicap)" />
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="organization" class="form-label">Organization</label>
+                            <InputSelect id="organization" class="form-select" @bind-Value="newPlayer.OrganizationId">
+                                <option value="">Select Organization</option>
+                                @if (organizations != null)
+                                {
+                                    @foreach (var org in organizations)
+                                    {
+                                        <option value="@org.Id">@org.Name</option>
+                                    }
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(() => newPlayer.OrganizationId)" />
+                        </div>
+                        
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary me-2" @onclick="HideAddPlayerModal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" disabled="@isSaving">
+                                @if (isSaving)
+                                {
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                }
+                                <i class="fas fa-save"></i> Save Player
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Player>? players;
+    private List<Player>? filteredPlayers;
+    private List<Organization>? organizations;
+    private string searchTerm = string.Empty;
+    private bool isLoading = true;
+    private bool showAddPlayerModal = false;
+    private bool isSaving = false;
+    private Player newPlayer = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            players = await GolfService.GetPlayersAsync();
+            organizations = await GolfService.GetOrganizationsAsync();
+            FilterPlayers();
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void OnSearchChanged(ChangeEventArgs e)
+    {
+        searchTerm = e.Value?.ToString() ?? string.Empty;
+        FilterPlayers();
+    }
+
+    private void FilterPlayers()
+    {
+        if (players == null)
+        {
+            filteredPlayers = null;
+            return;
+        }
+
+        if (string.IsNullOrEmpty(searchTerm))
+        {
+            filteredPlayers = players;
+        }
+        else
+        {
+            filteredPlayers = players.Where(p => 
+                p.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                p.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                p.Organization.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                (p.Email?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) == true)
+            ).ToList();
+        }
+        StateHasChanged();
+    }
+
+    private void ShowAddPlayerModal()
+    {
+        newPlayer = new Player();
+        showAddPlayerModal = true;
+    }
+
+    private void HideAddPlayerModal()
+    {
+        showAddPlayerModal = false;
+        newPlayer = new Player();
+    }
+
+    private async Task AddPlayer()
+    {
+        isSaving = true;
+        StateHasChanged();
+
+        try
+        {
+            await GolfService.AddPlayerAsync(newPlayer);
+            await LoadData();
+            HideAddPlayerModal();
+        }
+        catch (Exception ex)
+        {
+            // Handle error
+            Console.WriteLine($"Error adding player: {ex.Message}");
+        }
+        finally
+        {
+            isSaving = false;
+            StateHasChanged();
+        }
+    }
+}
