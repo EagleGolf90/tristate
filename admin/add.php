@@ -3,10 +3,11 @@ if (!isset($_POST['page'])) die('Must have page parameter. Please try again.');
 
 include('../preload.php');
 
+$location = ADMIN_URL . $object->getRedirectLink(strtolower($_POST['page']), $_POST['roundPlayed']);
+
 include(CLASSES . 'golf_scores.class.php');
 $object = new GolfScores();
 $methodName = 'add' . ucwords($_POST['page']);
-$location = ADMIN_URL . $object->getRedirectLink(strtolower($_POST['page']), $_POST['roundPlayed']);
 
 if (!method_exists($object, $methodName)) die('Something isn\'t working. Please check with Administrator.');
 

@@ -3,16 +3,16 @@ if (!isset($_GET['role'])) die('Must have role parameter. Please try again.');
 $role = strtolower($_GET['role']);
 
 include('../preload.php');
-include(HTML . 'beginHTML.php');
 
-$sqlTable = new SQLTable();
+include(LOAD_PATH . 'loadMenus.php');
+
+include(HTML . 'beginHTML.php');
 ?>
 <div class="container text-center">
-  <h2>IDGA / Tri-State Cup Main Menu</h2>
+  <h2>Tri-State Cup Main Menu</h2>
   <div class="row">
 <?php
-$rows = $sqlTable->load('loadMenus', array());
-foreach ($rows As $row) {
+foreach ($menus->displayMenus() as $row) {
   $url_menu = TRISTATE_URL . $row['URL'] . '?role=' . $role;
   if ($row['Admin'] == 'N') {
 ?>
